@@ -1,8 +1,7 @@
-
-
 <h1 *ngIf="!finishedAuthCheck()">
   Loading
 </h1>
 
 
+<shared-menu *ngIf="finishedAuthCheck()"></shared-menu>
 <router-outlet *ngIf="finishedAuthCheck()" />

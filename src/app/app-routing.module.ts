@@ -10,9 +10,9 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule ),
   },
   {
-    path: 'dashboard',
+    path: 'charts',
     canActivate: [ isAuthenticatedGuard ],
-    loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardModule ),
+    loadChildren: () => import('./charts/charts.module').then(m => m.ChartsModule),
   },
   {
     path: '**',

@@ -28,7 +28,7 @@ export class LoginPageComponent {
 
     this.authService.login(email, password)
       .subscribe({
-        next: () => this.router.navigateByUrl('/dashboard'),
+        next: () => this.router.navigateByUrl('/charts'),
         error: (message) => {
           Swal.fire('Error', message, 'error' )
         }

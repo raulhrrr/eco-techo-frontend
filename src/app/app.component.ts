@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from './auth/services/auth.service';
 import { AuthStatus } from './auth/interfaces';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,12 @@ export class AppComponent {
 
   private authService = inject(AuthService);
   private router = inject(Router);
+
+  constructor(private primengConfig: PrimeNGConfig) { }
+
+  ngOnInit() {
+    this.primengConfig.ripple = true;
+  }
 
   public finishedAuthCheck = computed<boolean>(() => {
     console.log(this.authService.authStatus())
@@ -32,7 +39,7 @@ export class AppComponent {
         return;
 
       case AuthStatus.authenticated:
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/charts/');
         return;
 
       case AuthStatus.notAuthenticated:
