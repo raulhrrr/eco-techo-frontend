@@ -21,6 +21,10 @@ export class AppComponent {
     this.primengConfig.ripple = true;
   }
 
+  get isUserAuthenticated() {
+    return this.authService.authStatus() === AuthStatus.authenticated;
+  }
+
   public finishedAuthCheck = computed<boolean>(() => {
     console.log(this.authService.authStatus())
     if (this.authService.authStatus() === AuthStatus.checking) {

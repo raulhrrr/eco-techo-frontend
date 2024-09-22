@@ -6,6 +6,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
     CommonModule,
     AuthRoutingModule,
     ReactiveFormsModule,
+    PrimeNgModule
   ]
 })
 export class AuthModule { }

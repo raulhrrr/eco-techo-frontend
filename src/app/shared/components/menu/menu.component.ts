@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'shared-menu',
@@ -10,6 +11,9 @@ import { MenuItem } from 'primeng/api';
 export class MenuComponent {
 
   public menuItems: MenuItem[] = [];
+
+  private authService = inject(AuthService);
+  public user = computed(() => this.authService.currentUser());
 
   ngOnInit() {
     this.menuItems = [
@@ -35,5 +39,9 @@ export class MenuComponent {
         ]
       }
     ];
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 }

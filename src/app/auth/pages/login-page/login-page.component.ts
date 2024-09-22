@@ -12,28 +12,24 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginPageComponent {
 
-  private fb          = inject( FormBuilder );
-  private authService = inject( AuthService );
-  private router      = inject( Router )
+  private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
+  private router = inject(Router)
 
-
-  public myForm: FormGroup = this.fb.group({
-    email:    ['raul@mail.com', [ Validators.required, Validators.email ]],
-    password: ['123456', [ Validators.required, Validators.minLength(6) ]],
+  public form: FormGroup = this.fb.group({
+    email: ['raul@mail.com', [Validators.required, Validators.email]],
+    password: ['123456', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
   });
 
-
   login() {
-    const { email, password } = this.myForm.value;
+    const { email, password } = this.form.value;
 
     this.authService.login(email, password)
       .subscribe({
         next: () => this.router.navigateByUrl('/charts'),
         error: (message) => {
-          Swal.fire('Error', message, 'error' )
+          Swal.fire('Error', message, 'error')
         }
-      })
-
+      });
   }
-
 }

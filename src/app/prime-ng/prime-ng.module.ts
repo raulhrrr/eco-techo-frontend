@@ -8,6 +8,8 @@ import { PanelModule } from 'primeng/panel';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ChartModule } from 'primeng/chart';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
 
 @NgModule({
   exports: [
@@ -18,7 +20,9 @@ import { ChartModule } from 'primeng/chart';
     PanelModule,
     TableModule,
     ToolbarModule,
-    ChartModule
+    ChartModule,
+    InputTextModule,
+    PasswordModule
   ]
 })
 export class PrimeNgModule { }

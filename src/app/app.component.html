@@ -3,5 +3,5 @@
 </h1>
 
 
-<shared-menu *ngIf="finishedAuthCheck()"></shared-menu>
+<shared-menu *ngIf="isUserAuthenticated"></shared-menu>
 <router-outlet *ngIf="finishedAuthCheck()" />
