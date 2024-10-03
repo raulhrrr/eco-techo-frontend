@@ -8,18 +8,17 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 
-
 @NgModule({
   declarations: [
     LoginPageComponent,
     RegisterPageComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
   ],
   imports: [
     CommonModule,
     AuthRoutingModule,
     ReactiveFormsModule,
-    PrimeNgModule
-  ]
+    PrimeNgModule,
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}

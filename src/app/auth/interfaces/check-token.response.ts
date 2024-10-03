@@ -2,7 +2,6 @@
 import { User } from './user.interface';
 
 export interface CheckTokenResponse {
-  user:  User;
+  user: User;
   token: string;
 }
-

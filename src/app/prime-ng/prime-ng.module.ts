@@ -6,11 +6,6 @@ import { PanelModule } from 'primeng/panel';
 import { ChartModule } from 'primeng/chart';
 
 @NgModule({
-  exports: [
-    PanelModule,
-    CardModule,
-    ChartModule,
-    MenubarModule,
-  ]
+  exports: [PanelModule, CardModule, ChartModule, MenubarModule],
 })
-export class PrimeNgModule { }
+export class PrimeNgModule {}

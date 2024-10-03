@@ -5,14 +5,12 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 @Component({
   selector: 'shared-menu',
   templateUrl: './menu.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class MenuComponent {
-
   public menuItems: MenuItem[] = [];
 
-  private authService = inject(AuthService);
+  private readonly authService = inject(AuthService);
   public user = computed(() => this.authService.currentUser());
 
   ngOnInit() {
@@ -24,20 +22,20 @@ export class MenuComponent {
           {
             label: 'Barras',
             icon: 'pi pi-chart-bar',
-            routerLink: 'charts/bar-chart'
+            routerLink: 'charts/bar-chart',
           },
           {
             label: 'Circular',
             icon: 'pi pi-chart-pie',
-            routerLink: 'charts/pie-chart'
+            routerLink: 'charts/pie-chart',
           },
           {
             label: 'Líneas',
             icon: 'pi pi-chart-line',
-            routerLink: 'charts/line-chart'
+            routerLink: 'charts/line-chart',
           },
-        ]
-      }
+        ],
+      },
     ];
   }
 

@@ -7,17 +7,8 @@ import { BarChartComponent } from './pages/bar-chart/bar-chart.component';
 import { LineChartComponent } from './pages/line-chart/line-chart.component';
 import { PieChartComponent } from './pages/pie-chart/pie-chart.component';
 
-
 @NgModule({
-  declarations: [
-    BarChartComponent,
-    LineChartComponent,
-    PieChartComponent,
-  ],
-  imports: [
-    CommonModule,
-    PrimeNgModule,
-    ChartsRoutingModule
-  ]
+  declarations: [BarChartComponent, LineChartComponent, PieChartComponent],
+  imports: [CommonModule, PrimeNgModule, ChartsRoutingModule],
 })
-export class ChartsModule { }
+export class ChartsModule {}

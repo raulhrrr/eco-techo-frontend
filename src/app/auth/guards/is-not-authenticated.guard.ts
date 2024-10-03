@@ -6,11 +6,10 @@ import { AuthStatus } from '../interfaces';
 // PublicGuard - PrivateGuard
 
 export const isNotAuthenticatedGuard: CanActivateFn = (route, state) => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
 
-  const authService = inject( AuthService );
-  const router      = inject( Router );
-
-  if ( authService.authStatus() === AuthStatus.authenticated ) {
+  if (authService.authStatus() === AuthStatus.authenticated) {
     router.navigateByUrl('/charts');
     return false;
   }

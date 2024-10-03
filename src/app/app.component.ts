@@ -8,14 +8,12 @@ import { PrimeNGConfig } from 'primeng/api';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-
-  private authService = inject(AuthService);
-  private router = inject(Router);
-
-  constructor(private primengConfig: PrimeNGConfig) { }
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  private readonly primengConfig = inject(PrimeNGConfig);
 
   ngOnInit() {
     this.primengConfig.ripple = true;
@@ -26,7 +24,7 @@ export class AppComponent {
   }
 
   public finishedAuthCheck = computed<boolean>(() => {
-    console.log(this.authService.authStatus())
+    console.log(this.authService.authStatus());
     if (this.authService.authStatus() === AuthStatus.checking) {
       return false;
     }
@@ -34,11 +32,8 @@ export class AppComponent {
     return true;
   });
 
-
   public authStatusChangedEffect = effect(() => {
-
     switch (this.authService.authStatus()) {
-
       case AuthStatus.checking:
         return;
 
@@ -49,13 +44,6 @@ export class AppComponent {
       case AuthStatus.notAuthenticated:
         this.router.navigateByUrl('/auth/login');
         return;
-
     }
-
-
-
-
   });
-
-
 }
