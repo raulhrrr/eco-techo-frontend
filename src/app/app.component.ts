@@ -24,10 +24,10 @@ export class AppComponent {
   }
 
   public finishedAuthCheck = computed<boolean>(() => {
-    console.log(this.authService.authStatus());
-    if (this.authService.authStatus() === AuthStatus.checking) {
-      return false;
-    }
+    // console.log(this.authService.authStatus());
+    // if (this.authService.authStatus() === AuthStatus.checking) {
+    //   return false;
+    // }
 
     return true;
   });

@@ -9,14 +9,14 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: 'charts',
+    path: 'dashboard',
     canActivate: [isAuthenticatedGuard],
-    loadChildren: () =>
-      import('./charts/charts.module').then((m) => m.ChartsModule),
+    loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
     path: '**',
-    redirectTo: 'auth',
+    // redirectTo: 'auth',
+    redirectTo: 'dashboard',
   },
 ];
 

@@ -16,24 +16,39 @@ export class MenuComponent {
   ngOnInit() {
     this.menuItems = [
       {
+        label: 'Inicio',
+        icon: 'pi pi-home',
+        routerLink: 'dashboard/',
+      },
+      {
+        label: 'Telemetría',
+        icon: 'pi pi-gauge',
+        routerLink: 'dashboard/gauge',
+      },
+      {
         label: 'Gráficos',
         icon: 'pi pi-bars',
         items: [
           {
-            label: 'Barras',
-            icon: 'pi pi-chart-bar',
-            routerLink: 'charts/bar-chart',
-          },
-          {
-            label: 'Circular',
-            icon: 'pi pi-chart-pie',
-            routerLink: 'charts/pie-chart',
-          },
-          {
-            label: 'Líneas',
+            label: 'Temperatura',
             icon: 'pi pi-chart-line',
-            routerLink: 'charts/line-chart',
+            routerLink: 'dashboard/charts/temperature',
           },
+          {
+            label: 'Humedad',
+            icon: 'pi pi-chart-line',
+            routerLink: 'dashboard/charts/humidity',
+          },
+          {
+            label: 'Presión',
+            icon: 'pi pi-chart-line',
+            routerLink: 'dashboard/charts/pressure',
+          },
+          {
+            label: 'Resistencia al gas',
+            icon: 'pi pi-chart-line',
+            routerLink: 'dashboard/charts/gas-resistance',
+          }
         ],
       },
     ];
