@@ -1,1 +1,12 @@
-<p>gauge works!</p>
+<div class="p-grid">
+  <div class="p-col-12 p-md-6 p-lg-3" *ngFor="let gauge of gauges">
+    <p-card>
+      <ng-template pTemplate="header">
+        <h2>{{ gauge.label }}</h2>
+      </ng-template>
+      <ngx-gauge [value]="gauge.value" [min]="gauge.min" [max]="gauge.max" [label]="gauge.append"
+        [thresholds]="gauge.thresholds" [markers]="gauge.markers" [margin]="20" [size]="250" [thick]="15" type="arch"
+        cap="butt"></ngx-gauge>
+    </p-card>
+  </div>
+</div>

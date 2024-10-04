@@ -22,7 +22,7 @@ export class MenuComponent {
       {
         label: 'Inicio',
         icon: 'pi pi-home',
-        routerLink: 'dashboard/',
+        routerLink: 'dashboard/home',
         routerLinkActiveOptions: { exact: true },
       },
       {

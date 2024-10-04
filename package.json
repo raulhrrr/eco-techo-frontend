@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "^18.2.4",
     "@angular/router": "^18.2.4",
     "chart.js": "^4.4.4",
+    "ngx-gauge": "^10.0.0",
     "primeflex": "^3.3.0",
     "primeicons": "^7.0.0",
     "primeng": "^15.0.1",
