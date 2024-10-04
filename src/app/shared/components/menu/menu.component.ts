@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 @Component({
   selector: 'shared-menu',
   templateUrl: './menu.component.html',
-  styles: [],
+  styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent {
   public menuItems: MenuItem[] = [];
@@ -13,17 +13,23 @@ export class MenuComponent {
   private readonly authService = inject(AuthService);
   public user = computed(() => this.authService.currentUser());
 
+  get isUserAuthenticated() {
+    return this.authService.isUserAuthenticated;
+  }
+
   ngOnInit() {
     this.menuItems = [
       {
         label: 'Inicio',
         icon: 'pi pi-home',
         routerLink: 'dashboard/',
+        routerLinkActiveOptions: { exact: true },
       },
       {
         label: 'Telemetría',
         icon: 'pi pi-gauge',
         routerLink: 'dashboard/gauge',
+        routerLinkActiveOptions: { exact: true },
       },
       {
         label: 'Gráficos',
@@ -33,21 +39,25 @@ export class MenuComponent {
             label: 'Temperatura',
             icon: 'pi pi-chart-line',
             routerLink: 'dashboard/charts/temperature',
+            routerLinkActiveOptions: { exact: true },
           },
           {
             label: 'Humedad',
             icon: 'pi pi-chart-line',
             routerLink: 'dashboard/charts/humidity',
+            routerLinkActiveOptions: { exact: true },
           },
           {
             label: 'Presión',
             icon: 'pi pi-chart-line',
             routerLink: 'dashboard/charts/pressure',
+            routerLinkActiveOptions: { exact: true },
           },
           {
             label: 'Resistencia al gas',
             icon: 'pi pi-chart-line',
             routerLink: 'dashboard/charts/gas-resistance',
+            routerLinkActiveOptions: { exact: true },
           }
         ],
       },

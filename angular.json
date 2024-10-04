@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "authApp": {
+    "ecoTecho": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "authApp:build:production"
+              "buildTarget": "ecoTecho:build:production"
             },
             "development": {
-              "buildTarget": "authApp:build:development"
+              "buildTarget": "ecoTecho:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "authApp:build"
+            "buildTarget": "ecoTecho:build"
           }
         },
         "test": {

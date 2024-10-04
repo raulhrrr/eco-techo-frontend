@@ -27,6 +27,10 @@ export class AuthService {
     this.checkAuthStatus().subscribe();
   }
 
+  get isUserAuthenticated() {
+    return this.authStatus() === AuthStatus.authenticated;
+  }
+
   private setAuthentication(user: User, token: string): boolean {
     this._currentUser.set(user);
     this._authStatus.set(AuthStatus.authenticated);

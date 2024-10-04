@@ -1,0 +1,8 @@
+.custom-menubar .p-menuitem {
+  margin-right: 10px;
+}
+
+.custom-menubar .p-menuitem-active>.p-menuitem-link {
+  background-color: #007ad9;
+  color: red;
+}

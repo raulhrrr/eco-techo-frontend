@@ -12,7 +12,6 @@ import { AppComponent } from './app.component';
 
 import { SharedModule } from './shared/shared.module';
 
-// Configuración del locale de la app
 import localeEsCO from '@angular/common/locales/es-CO';
 
 import { registerLocaleData } from '@angular/common';
