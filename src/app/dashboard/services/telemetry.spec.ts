@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { TelemetryService } from './telemetry.service';
 
-describe('TelemetricDataService', () => {
+describe('TelemetryService', () => {
   let service: TelemetryService;
 
   beforeEach(() => {

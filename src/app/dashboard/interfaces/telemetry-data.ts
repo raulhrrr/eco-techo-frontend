@@ -1,4 +1,4 @@
-export interface TelemetricDataModel {
+export interface TelemetryData {
   temperature: number;
   humidity: number;
   pressure: number;

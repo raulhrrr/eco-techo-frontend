@@ -1,2 +1,2 @@
-export * from './telemetric-data';
+export * from './telemetry-data';
 export * from './gauge-options';

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { environment } from 'src/environments/environments';
-import { TelemetricDataModel } from '../interfaces';
+import { TelemetryData } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +43,7 @@ export class TelemetryService {
     return Number((Math.random() * (max - min) + min).toFixed(2));
   };
 
-  getMockTelemetricData() {
+  getMockTelemetryData() {
     return of({
       temperature: this.getRandomNumber(-5, 50),
       humidity: this.getRandomNumber(0, 100),
@@ -52,9 +52,9 @@ export class TelemetryService {
     });
   }
 
-  onTelemetricData(): Observable<TelemetricDataModel> {
+  onTelemetryData(): Observable<TelemetryData> {
     return new Observable(observer => {
-      this.socket.on('telemetricData', data => {
+      this.socket.on('telemetryData', data => {
         observer.next(data);
       });
 

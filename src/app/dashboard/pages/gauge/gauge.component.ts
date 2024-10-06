@@ -25,7 +25,7 @@ export class GaugeComponent {
 
   initTelemetryService() {
     this.telemetryService.connect();
-    this.telemetryServiceSubscription = this.telemetryService.onTelemetricData().subscribe({
+    this.telemetryServiceSubscription = this.telemetryService.onTelemetryData().subscribe({
       next: ({ temperature, humidity, pressure, gas_resistance }) => {
         this.gauges[0].value = temperature;
         this.gauges[1].value = humidity;
