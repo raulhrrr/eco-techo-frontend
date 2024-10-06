@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { TelemetryService } from '../../services/telemetry.service';
 import { GaugeOptions, Marker } from '../../interfaces';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-gauge',
@@ -9,9 +10,10 @@ import { GaugeOptions, Marker } from '../../interfaces';
 })
 export class GaugeComponent {
   telemetryService = inject(TelemetryService);
+  telemetryServiceSubscription!: Subscription;
 
   gauges: GaugeOptions[] = [
-    this.generateGaugeOptions('Temperatura', 0, '°C', -5, 50),
+    this.generateGaugeOptions('Temperatura', -5, '°C', -5, 50),
     this.generateGaugeOptions('Humedad', 0, '%', 0, 100),
     this.generateGaugeOptions('Presión', 0, 'hPa', 0, 1000),
     this.generateGaugeOptions('Resistencia al gas', 0, 'kΩ', 0, 100)
@@ -22,15 +24,13 @@ export class GaugeComponent {
   }
 
   initTelemetryService() {
-    this.telemetryService.onTelemetricData().subscribe({
+    this.telemetryService.connect();
+    this.telemetryServiceSubscription = this.telemetryService.onTelemetricData().subscribe({
       next: ({ temperature, humidity, pressure, gas_resistance }) => {
         this.gauges[0].value = temperature;
         this.gauges[1].value = humidity;
         this.gauges[2].value = pressure;
         this.gauges[3].value = gas_resistance;
-      },
-      error: (error) => {
-        console.error('Error de conexión:', error);
       }
     });
   }
@@ -68,5 +68,10 @@ export class GaugeComponent {
     }
 
     return markers;
+  }
+
+  ngOnDestroy() {
+    this.telemetryService.disconnect();
+    this.telemetryServiceSubscription?.unsubscribe();
   }
 }

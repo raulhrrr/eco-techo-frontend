@@ -22,13 +22,21 @@ export class TelemetryService {
       console.log('Conectado al servidor de telemetría');
     });
 
-    this.socket.on('disconnect', (reason) => {
-      console.log(`Desconectado del servidor de telemetría: ${reason}`);
-    });
-
     this.socket.on('connect_error', (error) => {
       console.error('Error de conexión:', error);
     });
+  }
+
+  connect() {
+    if (!this.socket.connected) {
+      this.socket.connect();
+    }
+  }
+
+  disconnect() {
+    if (this.socket.connected) {
+      this.socket.disconnect();
+    }
   }
 
   private getRandomNumber(min: number, max: number) {
@@ -50,7 +58,6 @@ export class TelemetryService {
         observer.next(data);
       });
 
-      // Maneja la desconexión y reconexión
       this.socket.on('disconnect', () => {
         observer.error('Desconectado del servidor de telemetría');
       });
