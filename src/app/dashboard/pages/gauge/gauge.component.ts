@@ -13,7 +13,7 @@ export class GaugeComponent {
   telemetryServiceSubscription!: Subscription;
 
   gauges: GaugeOptions[] = [
-    this.generateGaugeOptions('Temperatura', -5, '°C', -5, 50),
+    this.generateGaugeOptions('Temperatura', 0, '°C', 0, 50),
     this.generateGaugeOptions('Humedad', 0, '%', 0, 100),
     this.generateGaugeOptions('Presión', 0, 'hPa', 0, 1000),
     this.generateGaugeOptions('Resistencia al gas', 0, 'kΩ', 0, 100)
@@ -45,11 +45,12 @@ export class GaugeComponent {
     const range = Math.abs(min) + max;
     const firstTertiere = range / 3;
     const secondTertiere = firstTertiere * 2;
+    const bgOpacity = 0.2;
 
     return {
-      [min]: { color: 'green' },
-      [firstTertiere]: { color: 'yellow' },
-      [secondTertiere]: { color: 'red' }
+      [min]: { color: '#008f39', bgOpacity },
+      [firstTertiere]: { color: '#ffff00', bgOpacity },
+      [secondTertiere]: { color: '#cb3234', bgOpacity }
     };
   }
 

@@ -7,8 +7,24 @@ import { PanelModule } from 'primeng/panel';
 import { ChartModule } from 'primeng/chart';
 import { ToolbarModule } from 'primeng/toolbar';
 import { CarouselModule } from 'primeng/carousel';
+import { SidebarModule } from 'primeng/sidebar';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
-  exports: [CardModule, MenuModule, MenubarModule, PanelModule, ChartModule, ToolbarModule, CarouselModule],
+  exports: [
+    CardModule,
+    MenuModule,
+    MenubarModule,
+    PanelModule,
+    ChartModule,
+    ToolbarModule,
+    CarouselModule,
+    SidebarModule,
+    ButtonModule,
+    InputTextModule,
+    CalendarModule,
+  ],
 })
-export class PrimeNgModule {}
+export class PrimeNgModule { }

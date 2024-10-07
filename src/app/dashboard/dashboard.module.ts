@@ -6,15 +6,19 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { GaugeComponent } from './pages/gauge/gauge.component';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
+import { ChartsComponent } from './pages/charts/charts.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    GaugeComponent
+    GaugeComponent,
+    ChartsComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     PrimeNgModule,
     NgxGaugeModule,
     DashboardRoutingModule

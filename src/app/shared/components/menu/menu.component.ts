@@ -33,33 +33,9 @@ export class MenuComponent {
       },
       {
         label: 'Gráficos',
-        icon: 'pi pi-bars',
-        items: [
-          {
-            label: 'Temperatura',
-            icon: 'pi pi-chart-line',
-            routerLink: 'dashboard/charts/temperature',
-            routerLinkActiveOptions: { exact: true },
-          },
-          {
-            label: 'Humedad',
-            icon: 'pi pi-chart-line',
-            routerLink: 'dashboard/charts/humidity',
-            routerLinkActiveOptions: { exact: true },
-          },
-          {
-            label: 'Presión',
-            icon: 'pi pi-chart-line',
-            routerLink: 'dashboard/charts/pressure',
-            routerLinkActiveOptions: { exact: true },
-          },
-          {
-            label: 'Resistencia al gas',
-            icon: 'pi pi-chart-line',
-            routerLink: 'dashboard/charts/gas-resistance',
-            routerLinkActiveOptions: { exact: true },
-          }
-        ],
+        icon: 'pi pi-chart-line',
+        routerLink: 'dashboard/charts',
+        routerLinkActiveOptions: { exact: true }
       },
     ];
   }

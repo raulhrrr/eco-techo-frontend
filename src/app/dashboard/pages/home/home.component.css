@@ -14,9 +14,9 @@
 .p-carousel-caption {
   position: absolute;
   white-space: nowrap;
-  bottom: 10px;
+  bottom: 1rem;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 5px 10px;
+  padding: 5px 1rem;
   border-radius: 3px;
 }

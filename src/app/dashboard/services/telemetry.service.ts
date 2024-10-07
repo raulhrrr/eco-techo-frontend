@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { environment } from 'src/environments/environments';
-import { TelemetryData } from '../interfaces';
+import { groupBy, TelemetryData, TelemetryDataFiltered } from '../interfaces';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TelemetryService {
   private readonly socket: Socket;
+  private readonly http = inject(HttpClient);
 
   constructor() {
     this.socket = io(environment.socketUrl, {
@@ -39,19 +41,6 @@ export class TelemetryService {
     }
   }
 
-  private getRandomNumber(min: number, max: number) {
-    return Number((Math.random() * (max - min) + min).toFixed(2));
-  };
-
-  getMockTelemetryData() {
-    return of({
-      temperature: this.getRandomNumber(-5, 50),
-      humidity: this.getRandomNumber(0, 100),
-      pressure: this.getRandomNumber(0, 1000),
-      gas_resistance: this.getRandomNumber(0, 100),
-    });
-  }
-
   onTelemetryData(): Observable<TelemetryData> {
     return new Observable(observer => {
       this.socket.on('telemetryData', data => {
@@ -69,6 +58,13 @@ export class TelemetryService {
       this.socket.on('reconnect_error', (error) => {
         observer.error(`Error al intentar reconectar al servidor de telemetría ${error}`);
       });
+    });
+  }
+
+  getFilteredTelemetryData(initDate: string, endDate: string, groupBy: groupBy): Observable<TelemetryDataFiltered[]> {
+    const url = `${environment.baseUrl}/api/telemetry/filtered-data`;
+    return this.http.get<TelemetryDataFiltered[]>(url, {
+      params: { initDate, endDate, groupBy }
     });
   }
 }

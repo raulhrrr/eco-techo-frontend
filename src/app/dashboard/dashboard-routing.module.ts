@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { GaugeComponent } from './pages/gauge/gauge.component';
+import { ChartsComponent } from './pages/charts/charts.component';
 
 const routes: Routes = [
   {
@@ -17,12 +18,11 @@ const routes: Routes = [
       },
       {
         path: 'charts',
-        loadChildren: () =>
-          import('./charts/charts.module').then((m) => m.ChartsModule),
+        component: ChartsComponent,
       },
       {
         path: '**',
-        redirectTo: 'home',
+        redirectTo: 'charts',
       },
     ],
   },
