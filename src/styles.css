@@ -40,7 +40,7 @@ html {
 /*---------------------------------------------*/
 a {
   font-family: Poppins-Regular;
-  font-size: 14px;
+  font-size: 1rem;
   line-height: 1.7;
   color: #666666;
   margin: 0px;
@@ -71,7 +71,7 @@ h6 {
 
 p {
   font-family: Poppins-Regular;
-  font-size: 14px;
+  font-size: 1rem;
   line-height: 1.7;
   color: #666666;
   margin: 0px;
@@ -115,14 +115,14 @@ button:hover {
 [ Utility ]*/
 .txt1 {
   font-family: Poppins-Regular;
-  font-size: 14px;
+  font-size: 1rem;
   line-height: 1.5;
   color: #666666;
 }
 
 .txt2 {
   font-family: Poppins-Regular;
-  font-size: 14px;
+  font-size: 1rem;
   line-height: 1.5;
   color: #333333;
   text-transform: uppercase;
@@ -184,7 +184,7 @@ button:hover {
 .login100-form-title {
   display: block;
   font-family: Poppins-Bold;
-  font-size: 39px;
+  font-size: 1.5rem;
   color: #333333;
   line-height: 1.2;
   text-align: center;
@@ -203,7 +203,7 @@ button:hover {
 
 .label-input100 {
   font-family: Poppins-Regular;
-  font-size: 14px;
+  font-size: 1rem;
   color: #333333;
   line-height: 1.5;
   padding-left: 7px;
@@ -211,7 +211,7 @@ button:hover {
 
 .input100 {
   font-family: Poppins-Medium;
-  font-size: 16px;
+  font-size: 1rem;
   color: #333333;
   line-height: 1.2;
 
@@ -238,7 +238,7 @@ button:hover {
   content: attr(data-symbol);
   font-family: Material-Design-Iconic-Font;
   color: #adadad;
-  font-size: 22px;
+  font-size: 1rem;
 
   display: -webkit-box;
   display: -webkit-flex;
@@ -334,7 +334,7 @@ button:hover {
 
 .login100-form-btn {
   font-family: Poppins-Medium;
-  font-size: 16px;
+  font-size: 1rem;
   color: #fff;
   line-height: 1.2;
   text-transform: uppercase;
