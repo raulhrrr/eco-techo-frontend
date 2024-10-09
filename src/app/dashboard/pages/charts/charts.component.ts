@@ -13,7 +13,7 @@ import { ChartData, ChartOptions } from 'chart.js';
 export class ChartsComponent {
   form: FormGroup;
   fb = inject(FormBuilder);
-  telemetryService = inject(TelemetryService); // TODO: Se está inicializando la conexión con el servicio de telemetría
+  telemetryService = inject(TelemetryService);
   currentDate!: string;
 
   chartData!: ChartData;

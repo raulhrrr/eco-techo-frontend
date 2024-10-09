@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { environment } from 'src/environments/environments';
 import { groupBy, TelemetryData, TelemetryDataFiltered } from '../interfaces';
@@ -9,10 +9,11 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TelemetryService {
-  private readonly socket: Socket;
+  private socket!: Socket;
   private readonly http = inject(HttpClient);
 
-  constructor() {
+  initializeSocket() {
+    if (this.socket) return;
     this.socket = io(environment.socketUrl, {
       reconnection: true,
       reconnectionAttempts: Infinity,
@@ -30,13 +31,14 @@ export class TelemetryService {
   }
 
   connect() {
-    if (!this.socket.connected) {
+    this.initializeSocket();
+    if (!this.socket?.connected) {
       this.socket.connect();
     }
   }
 
   disconnect() {
-    if (this.socket.connected) {
+    if (this.socket?.connected) {
       this.socket.disconnect();
     }
   }
