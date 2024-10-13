@@ -12,5 +12,5 @@ export const isNotAuthenticatedGuard: CanActivateFn = (_route, _state) => {
     return false;
   }
 
-  return true;
+  return true && authService.isAuthEnabled;
 };

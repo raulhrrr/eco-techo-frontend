@@ -31,6 +31,10 @@ export class AuthService {
     return this.authStatus() === AuthStatus.authenticated;
   }
 
+  get isAuthEnabled() {
+    return environment.isAuthEnabled;
+  }
+
   private setAuthentication(user: User, token: string): boolean {
     this._currentUser.set(user);
     this._authStatus.set(AuthStatus.authenticated);
