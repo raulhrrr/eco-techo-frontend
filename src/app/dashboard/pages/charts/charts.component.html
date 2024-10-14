@@ -1,5 +1,5 @@
-<div class="flex">
-  <div class="col-3 p-4">
+<div class="flex flex-wrap">
+  <div class="w-full md:w-4 lg:w-3 p-4">
     <h2 class="mb-4">Filtrar Información</h2>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="p-field mb-4">
@@ -15,7 +15,8 @@
       <p-button type="submit" label="Filtrar" [disabled]="form.invalid"></p-button>
     </form>
   </div>
-  <div class="col-9 flex-1 p-3">
+
+  <div class="w-full md:w-8 lg:w-9 p-3">
     <p-chart type="line" [data]="chartData" [options]="chartOptions"></p-chart>
   </div>
 </div>

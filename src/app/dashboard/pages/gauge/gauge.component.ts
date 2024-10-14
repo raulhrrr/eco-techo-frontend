@@ -9,18 +9,13 @@ import { Subscription } from 'rxjs';
   styles: ``
 })
 export class GaugeComponent {
+  gauges: GaugeOptions[] = [];
   telemetryService = inject(TelemetryService);
   telemetryServiceSubscription!: Subscription;
 
-  gauges: GaugeOptions[] = [
-    this.generateGaugeOptions('Temperatura', 0, '°C', 0, 50),
-    this.generateGaugeOptions('Humedad', 0, '%', 0, 100),
-    this.generateGaugeOptions('Presión', 0, 'hPa', 0, 1000),
-    this.generateGaugeOptions('Resistencia al gas', 0, 'kΩ', 0, 100)
-  ];
-
   ngOnInit() {
     this.initTelemetryService();
+    this.initGaugeOptions();
   }
 
   initTelemetryService() {
@@ -32,6 +27,13 @@ export class GaugeComponent {
         this.gauges[2].value = pressure;
         this.gauges[3].value = gas_resistance;
       }
+    });
+  }
+
+  initGaugeOptions() {
+    this.telemetryService.getTelemetryParameterization().subscribe({
+      next: (parameterization) => parameterization.forEach(({ label, initialValue, append, minValue, maxValue }) =>
+        this.gauges.push(this.generateGaugeOptions(label, initialValue, append, minValue, maxValue)))
     });
   }
 

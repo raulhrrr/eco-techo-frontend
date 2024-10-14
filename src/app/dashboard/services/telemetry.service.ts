@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { environment } from 'src/environments/environment';
-import { groupBy, TelemetryData, TelemetryDataFiltered } from '../interfaces';
+import { groupBy, TelemetryData, TelemetryDataFiltered, TelemetryParameterization } from '../interfaces';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -61,6 +61,11 @@ export class TelemetryService {
         observer.error(`Error al intentar reconectar al servidor de telemetría ${error}`);
       });
     });
+  }
+
+  getTelemetryParameterization(): Observable<TelemetryParameterization[]> {
+    const url = `${environment.baseUrl}/api/telemetry/parameterization`;
+    return this.http.get<TelemetryParameterization[]>(url);
   }
 
   getFilteredTelemetryData(initDate: string, endDate: string, groupBy: groupBy): Observable<TelemetryDataFiltered[]> {

@@ -14,3 +14,12 @@ export interface TelemetryDataFiltered {
   avg_pressure: number;
   avg_gas_resistance: number;
 }
+
+export interface TelemetryParameterization {
+  id: string;
+  label: string;
+  initialValue: number;
+  append: string;
+  minValue: number;
+  maxValue: number
+}

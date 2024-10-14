@@ -110,7 +110,6 @@ export class ChartsComponent {
 
       const groupBy = initDate === endDate ? 'hour' : 'day';
       this.telemetryService.getFilteredTelemetryData(initDate, endDate, groupBy).subscribe(data => {
-        console.log({ groupBy, data });
         this.populateChartData(data, groupBy);
       });
     }
