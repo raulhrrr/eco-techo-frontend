@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environment';
 import { groupBy, TelemetryData, TelemetryDataFiltered } from '../interfaces';
 import { HttpClient } from '@angular/common/http';
 
