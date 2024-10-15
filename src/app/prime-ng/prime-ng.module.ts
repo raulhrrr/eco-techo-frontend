@@ -11,6 +11,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   exports: [
@@ -25,6 +26,7 @@ import { CalendarModule } from 'primeng/calendar';
     ButtonModule,
     InputTextModule,
     CalendarModule,
+    DropdownModule,
   ],
 })
 export class PrimeNgModule { }

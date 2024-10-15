@@ -65,7 +65,7 @@ export class GaugeComponent {
 
     let value = min;
     while (value <= range) {
-      markers[value.toString()] = { color, size: 10, label: value.toString(), font: '12px arial' };
+      markers[value.toString()] = { color, size: 10, label: value.toString(), font: '1rem arial' };
       if (value < (range + min)) markers[(value + division / 2).toString()] = { color, size: 5 };
       value += division;
     }

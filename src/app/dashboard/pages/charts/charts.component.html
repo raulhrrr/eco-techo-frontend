@@ -17,6 +17,9 @@
   </div>
 
   <div class="w-full md:w-8 lg:w-9 p-3">
-    <p-chart type="line" [data]="chartData" [options]="chartOptions"></p-chart>
+    <div class="mb-4">
+      <p-dropdown [options]="chartTypes" (onChange)="onChartTypeChange($event)" placeholder="Seleccione el tipo de diagrama"></p-dropdown>
+    </div>
+    <p-chart #chart [type]="selectedChartType" [data]="chartData" [options]="chartOptions"></p-chart>
   </div>
 </div>

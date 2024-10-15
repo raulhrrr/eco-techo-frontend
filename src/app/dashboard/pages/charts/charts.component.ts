@@ -1,9 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { getFormattedDate, getDayOrHourFromDate } from 'src/app/utils/date-utils';
 import { TelemetryService } from '../../services/telemetry.service';
-import { groupBy, TelemetryDataFiltered } from '../../interfaces';
+import { ChartType, groupBy, TelemetryDataFiltered } from '../../interfaces';
 import { ChartData, ChartOptions } from 'chart.js';
+import { UIChart } from 'primeng/chart';
 
 @Component({
   selector: 'app-charts',
@@ -11,10 +12,13 @@ import { ChartData, ChartOptions } from 'chart.js';
   styles: ``
 })
 export class ChartsComponent {
+  @ViewChild('chart') chartComponent!: UIChart;
   form: FormGroup;
   fb = inject(FormBuilder);
   telemetryService = inject(TelemetryService);
   currentDate!: string;
+  chartTypes: ChartType[];
+  selectedChartType: string = 'line';
 
   chartData!: ChartData;
   chartOptions!: ChartOptions;
@@ -24,14 +28,26 @@ export class ChartsComponent {
       initDate: ['', Validators.required],
       endDate: ['', Validators.required]
     });
+
+    this.chartTypes = [
+      { label: 'Líneas', value: 'line' },
+      { label: 'Barras', value: 'bar' },
+      // { label: 'Circular', value: 'pie' },
+      // { label: 'Dona', value: 'doughnut' },
+      // { label: 'Polar', value: 'polarArea' },
+      // { label: 'Radar', value: 'radar' }
+    ];
   }
 
   ngOnInit() {
+    this.initializeCharOptions();
     this.initializeFormData();
     this.initializeChartData();
   }
 
-  private initializeChartData() {
+  private initializeCharOptions() {
+    const selected = this.chartTypes.find(c => c.value === this.selectedChartType);
+    const text = `Diagrama de ${selected?.label}`;
     this.chartOptions = {
       responsive: true,
       plugins: {
@@ -40,11 +56,13 @@ export class ChartsComponent {
         },
         title: {
           display: true,
-          text: 'Diagrama de Líneas'
+          text
         }
       }
     };
+  }
 
+  private initializeChartData() {
     this.telemetryService.getFilteredTelemetryData(this.currentDate, this.currentDate, 'hour').subscribe(data => {
       this.populateChartData(data, 'hour');
     });
@@ -100,6 +118,7 @@ export class ChartsComponent {
         }
       ]
     };
+    this.chartComponent.refresh();
   }
 
   onSubmit() {
@@ -115,4 +134,20 @@ export class ChartsComponent {
     }
   }
 
+  resetChart() {
+    setTimeout(() => {
+      this.chartComponent.reinit();
+    }, 0);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    if (this.chartComponent) this.resetChart();
+  }
+
+  onChartTypeChange(event: any) {
+    this.selectedChartType = event.value;
+    this.initializeCharOptions();
+    this.resetChart();
+  }
 }

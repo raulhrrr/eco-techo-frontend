@@ -7,7 +7,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { GaugeComponent } from './pages/gauge/gauge.component';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { ChartsComponent } from './pages/charts/charts.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     PrimeNgModule,
     NgxGaugeModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    FormsModule
   ]
 })
 export class DashboardModule { }
