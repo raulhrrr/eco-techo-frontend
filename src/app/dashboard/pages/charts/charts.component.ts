@@ -93,6 +93,7 @@ export class ChartsComponent {
           data: data.map(d => d.avg_temperature),
           fill: false,
           borderColor: '#42A5F5',
+          backgroundColor: '#42A5F5',
           tension: 0.4
         },
         {
@@ -100,6 +101,7 @@ export class ChartsComponent {
           data: data.map(d => d.avg_humidity),
           fill: false,
           borderColor: '#FFA726',
+          backgroundColor: '#FFA726',
           tension: 0.4
         },
         {
@@ -107,6 +109,7 @@ export class ChartsComponent {
           data: data.map(d => d.avg_pressure),
           fill: false,
           borderColor: '#66BB6A',
+          backgroundColor: '#66BB6A',
           tension: 0.4
         },
         {
@@ -114,6 +117,7 @@ export class ChartsComponent {
           data: data.map(d => d.avg_gas_resistance),
           fill: false,
           borderColor: '#EF5350',
+          backgroundColor: '#EF5350',
           tension: 0.4
         }
       ]
