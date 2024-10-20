@@ -14,27 +14,38 @@ export class GaugeComponent {
   telemetryServiceSubscription!: Subscription;
 
   ngOnInit() {
-    this.initTelemetryService();
+    this.loadGauges();
     this.initGaugeOptions();
+    this.initTelemetryService();
   }
 
   initTelemetryService() {
     this.telemetryService.connect();
     this.telemetryServiceSubscription = this.telemetryService.onTelemetryData().subscribe({
       next: ({ temperature, humidity, pressure, gas_resistance }) => {
+        if (!this.gauges.length) return;
+
         this.gauges[0].value = temperature;
         this.gauges[1].value = humidity;
         this.gauges[2].value = pressure;
         this.gauges[3].value = gas_resistance;
+
+        localStorage.setItem('gauges', JSON.stringify(this.gauges));
       }
     });
   }
 
   initGaugeOptions() {
+    if (this.gauges.length) return;
     this.telemetryService.getTelemetryParameterization().subscribe({
       next: (parameterization) => parameterization.forEach(({ label, initialValue, append, minValue, maxValue }) =>
         this.gauges.push(this.generateGaugeOptions(label, initialValue, append, minValue, maxValue)))
     });
+  }
+
+  loadGauges() {
+    const storedGauges = localStorage.getItem('gauges');
+    this.gauges = storedGauges ? JSON.parse(storedGauges) : this.gauges;
   }
 
   generateGaugeOptions(label: string, value: number, append: string, min: number, max: number) {
