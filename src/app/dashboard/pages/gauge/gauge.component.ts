@@ -30,17 +30,30 @@ export class GaugeComponent {
         this.gauges[2].value = pressure;
         this.gauges[3].value = gas_resistance;
 
-        localStorage.setItem('gauges', JSON.stringify(this.gauges));
+        this.setGaugesToLocalStorage();
       }
     });
   }
 
   initGaugeOptions() {
-    if (this.gauges.length) return;
     this.telemetryService.getTelemetryParameterization().subscribe({
-      next: (parameterization) => parameterization.forEach(({ label, initialValue, append, minValue, maxValue }) =>
-        this.gauges.push(this.generateGaugeOptions(label, initialValue, append, minValue, maxValue)))
+      next: (parameterization) => parameterization.forEach(({ label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold }) =>
+        this.gauges.push(this.generateGaugeOptions(label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold))),
+      error: () => {
+        this.gauges = [
+          this.generateGaugeOptions('Temperatura', 0, '°C', 0, 50, 0, 0),
+          this.generateGaugeOptions('Humedad', 0, '%', 0, 100, 0, 0),
+          this.generateGaugeOptions('Presión', 0, 'hPa', 0, 1000, 0, 0),
+          this.generateGaugeOptions('Resistencia al gas', 0, 'KΩ', 0, 100, 0, 0),
+        ]
+        this.setGaugesToLocalStorage();
+      },
+      complete: () => this.setGaugesToLocalStorage()
     });
+  }
+
+  setGaugesToLocalStorage() {
+    localStorage.setItem('gauges', JSON.stringify(this.gauges));
   }
 
   loadGauges() {
@@ -48,9 +61,9 @@ export class GaugeComponent {
     this.gauges = storedGauges ? JSON.parse(storedGauges) : this.gauges;
   }
 
-  generateGaugeOptions(label: string, value: number, append: string, min: number, max: number) {
+  generateGaugeOptions(label: string, value: number, append: string, min: number, max: number, lowerThreshold: number, upperThreshold: number) {
     return {
-      label, value, min, max, append, thresholds: this.generateThresholds(min, max), markers: this.generateMarkers(min, max)
+      label, value, min, max, append, thresholds: this.generateThresholds(min, max), markers: this.generateMarkers(min, max), lowerThreshold, upperThreshold
     }
   }
 

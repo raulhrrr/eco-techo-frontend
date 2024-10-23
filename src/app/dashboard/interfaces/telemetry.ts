@@ -21,5 +21,7 @@ export interface TelemetryParameterization {
   initialValue: number;
   append: string;
   minValue: number;
-  maxValue: number
+  maxValue: number;
+  lowerThreshold: number;
+  upperThreshold: number;
 }

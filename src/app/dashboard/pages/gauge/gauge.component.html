@@ -4,9 +4,25 @@
   </div>
   <div class="col-12 lg:col-6 xl:col-6" *ngFor="let gauge of gauges">
     <p-card [header]="gauge.label" class="flex justify-content-evenly">
-      <ngx-gauge [value]="gauge.value" [min]="gauge.min" [max]="gauge.max" [label]="gauge.append"
-        [thresholds]="gauge.thresholds" [markers]="gauge.markers" [margin]="20" [size]="300" [thick]="15" type="arch"
-        cap="butt"></ngx-gauge>
+      <div class="flex justify-content-center">
+        <ngx-gauge [value]="gauge.value" [min]="gauge.min" [max]="gauge.max" [label]="gauge.append"
+          [thresholds]="gauge.thresholds" [markers]="gauge.markers" [margin]="20" [size]="250" [thick]="15" type="arch"
+          cap="butt"></ngx-gauge>
+      </div>
+      <div class="mt-3">
+        <div class="mt-2">
+          <p><b>Valor mínimo:</b> {{ gauge.min | number: '1.2-2' }} <b>{{ gauge.append }}</b></p>
+        </div>
+        <div class="mt-2">
+          <p><b>Valor máximo</b> {{ gauge.max | number: '1.2-2' }} <b>{{ gauge.append }}</b></p>
+        </div>
+        <div class="mt-2">
+          <p><b>Umbral inferior:</b> {{ gauge.lowerThreshold | number: '1.2-2' }} <b>{{ gauge.append }}</b></p>
+        </div>
+        <div class="mt-2">
+          <p><b>Umbral superior:</b> {{ gauge.upperThreshold | number: '1.2-2' }} <b>{{ gauge.append }}</b></p>
+        </div>
+      </div>
     </p-card>
   </div>
 </div>

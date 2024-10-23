@@ -16,4 +16,6 @@ export interface GaugeOptions {
   append: string;
   thresholds: { [key: string]: { color: string } };
   markers: { [key: string]: Marker };
+  lowerThreshold: number;
+  upperThreshold: number;
 }
