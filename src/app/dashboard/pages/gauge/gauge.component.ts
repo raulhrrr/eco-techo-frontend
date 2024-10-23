@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { TelemetryService } from '../../services/telemetry.service';
 import { GaugeOptions, Marker } from '../../interfaces';
 import { Subscription } from 'rxjs';
+import { MEASUREMENT_VARIABLES } from 'src/app/constants/measurement-variables';
 
 @Component({
   selector: 'app-gauge',
@@ -25,30 +26,41 @@ export class GaugeComponent {
       next: ({ temperature, humidity, pressure, gas_resistance }) => {
         if (!this.gauges.length) return;
 
-        this.gauges[0].value = temperature;
-        this.gauges[1].value = humidity;
-        this.gauges[2].value = pressure;
-        this.gauges[3].value = gas_resistance;
+        this.updateGaugeValue(MEASUREMENT_VARIABLES.TEMPERATURE, temperature);
+        this.updateGaugeValue(MEASUREMENT_VARIABLES.HUMIDITY, humidity);
+        this.updateGaugeValue(MEASUREMENT_VARIABLES.PRESSURE, pressure);
+        this.updateGaugeValue(MEASUREMENT_VARIABLES.GAS_RESISTANCE, gas_resistance);
 
         this.setGaugesToLocalStorage();
       }
     });
   }
 
+  private updateGaugeValue(label: string, temperature: number) {
+    const gauge = this.gauges.find(gauge => gauge.label === label);
+    if (gauge) gauge.value = temperature
+  }
+
   initGaugeOptions() {
+    if (this.gauges.length) return;
     this.telemetryService.getTelemetryParameterization().subscribe({
-      next: (parameterization) => parameterization.forEach(({ label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold }) =>
-        this.gauges.push(this.generateGaugeOptions(label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold))),
-      error: () => {
-        this.gauges = [
-          this.generateGaugeOptions('Temperatura', 0, '°C', 0, 50, 0, 0),
-          this.generateGaugeOptions('Humedad', 0, '%', 0, 100, 0, 0),
-          this.generateGaugeOptions('Presión', 0, 'hPa', 0, 1000, 0, 0),
-          this.generateGaugeOptions('Resistencia al gas', 0, 'KΩ', 0, 100, 0, 0),
-        ]
+      next: (parameterization) => {
+        parameterization.forEach(({ label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold }) => {
+          this.gauges.push(this.generateGaugeOptions(label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold));
+        });
+
         this.setGaugesToLocalStorage();
       },
-      complete: () => this.setGaugesToLocalStorage()
+      error: () => {
+        this.gauges = [
+          this.generateGaugeOptions(MEASUREMENT_VARIABLES.TEMPERATURE, 0, '°C', 0, 50, 0, 0),
+          this.generateGaugeOptions(MEASUREMENT_VARIABLES.HUMIDITY, 0, '%', 0, 100, 0, 0),
+          this.generateGaugeOptions(MEASUREMENT_VARIABLES.PRESSURE, 0, 'hPa', 0, 1000, 0, 0),
+          this.generateGaugeOptions(MEASUREMENT_VARIABLES.GAS_RESISTANCE, 0, 'KΩ', 0, 100, 0, 0),
+        ]
+
+        this.setGaugesToLocalStorage();
+      }
     });
   }
 
