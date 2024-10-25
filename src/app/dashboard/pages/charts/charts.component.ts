@@ -63,8 +63,20 @@ export class ChartsComponent {
   }
 
   private initializeChartData() {
-    this.telemetryService.getFilteredTelemetryData(this.currentDate, this.currentDate, 'hour').subscribe(data => {
-      this.populateChartData(data, 'hour');
+    this.telemetryService.getFilteredTelemetryData(this.currentDate, this.currentDate, 'hour').subscribe({
+      next: data => {
+        this.populateChartData(data, 'hour');
+      },
+      error: () => {
+        const data: TelemetryDataFiltered[] = [{
+          groupedDate: `${this.currentDate} 00:00:00`,
+          avg_temperature: 0,
+          avg_humidity: 0,
+          avg_pressure: 0,
+          avg_gas_resistance: 0
+        }];
+        this.populateChartData(data, 'hour');
+      }
     });
 
   }
