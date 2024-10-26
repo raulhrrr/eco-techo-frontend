@@ -8,13 +8,15 @@ import { GaugeComponent } from './pages/gauge/gauge.component';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { ChartsComponent } from './pages/charts/charts.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ParameterizationComponent } from './pages/parameterization/parameterization.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     GaugeComponent,
-    ChartsComponent
+    ChartsComponent,
+    ParameterizationComponent
   ],
   imports: [
     CommonModule,

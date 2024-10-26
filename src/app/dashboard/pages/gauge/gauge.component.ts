@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { TelemetryService } from '../../services/telemetry.service';
-import { GaugeOptions, Marker } from '../../interfaces';
+import { GaugeOptions, Marker, TelemetryParameterization } from '../../interfaces';
 import { Subscription } from 'rxjs';
 import { MEASUREMENT_VARIABLES } from 'src/app/constants/measurement-variables';
 
@@ -36,15 +36,19 @@ export class GaugeComponent {
     });
   }
 
-  private updateGaugeValue(label: string, temperature: number) {
+  private updateGaugeValue(label: string, value: number) {
     const gauge = this.gauges.find(gauge => gauge.label === label);
-    if (gauge) gauge.value = temperature
+    if (gauge) gauge.value = value
   }
 
   initGaugeOptions() {
-    if (this.gauges.length) return;
     this.telemetryService.getTelemetryParameterization().subscribe({
       next: (parameterization) => {
+        if (this.gauges.length) {
+          this.updateGaugeParameterization(parameterization);
+          return;
+        };
+
         parameterization.forEach(({ label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold }) => {
           this.gauges.push(this.generateGaugeOptions(label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold));
         });
@@ -60,6 +64,18 @@ export class GaugeComponent {
         ]
 
         this.setGaugesToLocalStorage();
+      }
+    });
+  }
+
+  updateGaugeParameterization(parameterization: TelemetryParameterization[]) {
+    this.gauges.forEach(gauge => {
+      const parameter = parameterization.find(param => param.label === gauge.label);
+      if (parameter) {
+        gauge.min = parameter.minValue;
+        gauge.max = parameter.maxValue;
+        gauge.lowerThreshold = parameter.lowerThreshold;
+        gauge.upperThreshold = parameter.upperThreshold;
       }
     });
   }

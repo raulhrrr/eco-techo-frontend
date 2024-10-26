@@ -25,3 +25,8 @@ export interface TelemetryParameterization {
   lowerThreshold: number;
   upperThreshold: number;
 }
+
+export interface TelemetryResponse {
+  statusCode: number;
+  message: string;
+}

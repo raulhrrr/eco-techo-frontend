@@ -44,7 +44,7 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<boolean> {
-    const url = `${this.baseUrl}/auth/login`;
+    const url = `${this.baseUrl}/api/auth/login`;
     const body = { email, password };
 
     return this.http.post<LoginResponse>(url, body).pipe(
@@ -54,7 +54,7 @@ export class AuthService {
   }
 
   register(name: string, email: string, password: string): Observable<boolean> {
-    const url = `${this.baseUrl}/auth/register`;
+    const url = `${this.baseUrl}/api/auth/register`;
     const body = { name, email, password };
 
     return this.http.post<LoginResponse>(url, body).pipe(
@@ -64,7 +64,7 @@ export class AuthService {
   }
 
   checkAuthStatus(): Observable<boolean> {
-    const url = `${this.baseUrl}/auth/check-token`;
+    const url = `${this.baseUrl}/api/auth/check-token`;
     const token = localStorage.getItem('token');
 
     if (!token) {

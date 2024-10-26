@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { GaugeComponent } from './pages/gauge/gauge.component';
 import { ChartsComponent } from './pages/charts/charts.component';
+import { ParameterizationComponent } from './pages/parameterization/parameterization.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: 'charts',
         component: ChartsComponent,
+      },
+      {
+        path: 'parameterization',
+        component: ParameterizationComponent
       },
       {
         path: '**',

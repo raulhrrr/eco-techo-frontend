@@ -1,0 +1,36 @@
+<div class="grid justify-content-center align-items-center min-h-screen">
+  <div class="col-12">
+    <h2 class="text-center">Actualizar Parámetros</h2>
+  </div>
+  <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6" *ngFor="let parameter of parameters">
+    <div class="flex justify-content-center mb-4">
+      <form [formGroup]="parameter.form" (ngSubmit)="onParameterSubmit(parameter)"
+        class="p-fluid w-full md:w-8 lg:w-6 xl:w-6">
+        <input type="hidden" formControlName="id">
+        <div class="p-field mb-4">
+          <label class="block mb-2" for="label">Parámetro</label>
+          <input pInputText id="label" formControlName="label" type="text" [disabled]="true" class="w-full">
+        </div>
+        <div class="p-field mb-4">
+          <label class="block mb-2" for="minValue">Valor Mínimo</label>
+          <input pInputText id="minValue" formControlName="minValue" type="number" class="w-full">
+        </div>
+        <div class="p-field mb-4">
+          <label class="block mb-2" for="maxValue">Valor Máximo</label>
+          <input pInputText id="maxValue" formControlName="maxValue" type="number" class="w-full">
+        </div>
+        <div class="p-field mb-4">
+          <label class="block mb-2" for="lowerThreshold">Umbral Inferior</label>
+          <input pInputText id="lowerThreshold" formControlName="lowerThreshold" type="number" class="w-full">
+        </div>
+        <div class="p-field mb-4">
+          <label class="block mb-2" for="upperThreshold">Umbral Superior</label>
+          <input pInputText id="upperThreshold" formControlName="upperThreshold" type="number" class="w-full">
+        </div>
+        <div class="p-field mb-4">
+          <p-button type="submit" label="Actualizar" [disabled]="parameter.form.invalid" class="w-full"></p-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

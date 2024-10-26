@@ -1,4 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
@@ -10,6 +11,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 export class MenuComponent {
   public menuItems: MenuItem[] = [];
 
+  private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   public user = computed(() => this.authService.currentUser());
 
@@ -37,7 +39,18 @@ export class MenuComponent {
         routerLink: 'dashboard/charts',
         routerLinkActiveOptions: { exact: true }
       },
+      {
+        label: 'Parametrización',
+        icon: 'pi pi-cog',
+        routerLink: 'dashboard/parameterization',
+        routerLinkActiveOptions: { exact: true },
+        // visible: this.isUserAuthenticated,
+      },
     ];
+  }
+
+  onLogin() {
+    this.router.navigateByUrl('/auth/login');
   }
 
   onLogout() {

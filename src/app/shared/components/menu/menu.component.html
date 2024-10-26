@@ -5,6 +5,9 @@
 </p-toolbar>
 
 <p-menubar [model]="menuItems" class="custom-menubar">
+  <!-- <button (click)="onLogin()" *ngIf="!isUserAuthenticated">
+    Iniciar Sesión
+  </button> -->
   <button (click)="onLogout()" *ngIf="isUserAuthenticated">
     Cerrar Sesión
   </button>

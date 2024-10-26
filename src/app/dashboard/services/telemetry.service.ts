@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { environment } from 'src/environments/environment';
-import { groupBy, TelemetryData, TelemetryDataFiltered, TelemetryParameterization } from '../interfaces';
+import { groupBy, TelemetryData, TelemetryDataFiltered, TelemetryParameterization, TelemetryResponse } from '../interfaces';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -73,5 +73,10 @@ export class TelemetryService {
     return this.http.get<TelemetryDataFiltered[]>(url, {
       params: { initDate, endDate, groupBy }
     });
+  }
+
+  updateTelemetryParameterization(id: string, label: string, minValue: number, maxValue: number, lowerThreshold: number, upperThreshold: number): Observable<TelemetryResponse> {
+    const url = `${environment.baseUrl}/api/telemetry/parameterization`;
+    return this.http.patch<TelemetryResponse>(url, { id, label, minValue, maxValue, lowerThreshold, upperThreshold });
   }
 }
