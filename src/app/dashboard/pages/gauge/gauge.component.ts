@@ -75,6 +75,8 @@ export class GaugeComponent {
         gauge.max = parameter.maxValue;
         gauge.lowerThreshold = parameter.lowerThreshold;
         gauge.upperThreshold = parameter.upperThreshold;
+        gauge.thresholds = this.generateThresholds(parameter.minValue, parameter.maxValue);
+        gauge.markers = this.generateMarkers(parameter.minValue, parameter.maxValue);
       }
     });
     this.setGaugesToLocalStorage();
