@@ -52,7 +52,6 @@ export class GaugeComponent {
         parameterization.forEach(({ label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold }) => {
           this.gauges.push(this.generateGaugeOptions(label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold));
         });
-
         this.setGaugesToLocalStorage();
       },
       error: () => {
@@ -78,6 +77,7 @@ export class GaugeComponent {
         gauge.upperThreshold = parameter.upperThreshold;
       }
     });
+    this.setGaugesToLocalStorage();
   }
 
   setGaugesToLocalStorage() {
