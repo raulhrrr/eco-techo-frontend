@@ -5,7 +5,7 @@
   <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6" *ngFor="let parameter of parameters">
     <div class="flex justify-content-center mb-4">
       <form [formGroup]="parameter.form" (ngSubmit)="onParameterSubmit(parameter)"
-        class="p-fluid w-full md:w-8 lg:w-6 xl:w-6">
+        class="p-fluid w-10 md:w-8 lg:w-6 xl:w-6">
         <input type="hidden" formControlName="id">
         <div class="p-field mb-4">
           <label class="block mb-2" for="label">Parámetro</label>
