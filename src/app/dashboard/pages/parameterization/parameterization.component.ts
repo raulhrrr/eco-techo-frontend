@@ -53,7 +53,7 @@ export class ParameterizationComponent {
       const { id, minValue, maxValue, lowerThreshold, upperThreshold } = parameter.form.value;
       this.telemetryService.updateTelemetryParameterization(id, parameter.label, minValue, maxValue, lowerThreshold, upperThreshold).subscribe({
         next: ({ message }) => { Swal.fire('Éxito', message, 'success'); },
-        error: () => { Swal.fire('Error', 'Ocurrió un error al actualizar el parámetro', 'error'); }
+        error: ({ message }) => { Swal.fire('Error', message, 'error'); }
       });
     }
   }
