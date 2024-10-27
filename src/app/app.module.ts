@@ -10,8 +10,6 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { SharedModule } from './shared/shared.module';
-
 import localeEsCO from '@angular/common/locales/es-CO';
 
 import { registerLocaleData } from '@angular/common';
@@ -25,11 +23,10 @@ registerLocaleData(localeEsCO);
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    SharedModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-CO' },
     provideHttpClient(withInterceptorsFromDi()),
   ],
 })
-export class AppModule {}
+export class AppModule { }

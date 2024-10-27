@@ -33,17 +33,7 @@ export class AppComponent {
   });
 
   public authStatusChangedEffect = effect(() => {
-    switch (this.authService.authStatus()) {
-      case AuthStatus.checking:
-        return;
-
-      case AuthStatus.authenticated:
-        this.router.navigateByUrl('/dashboard/');
-        return;
-
-      case AuthStatus.notAuthenticated:
-        this.router.navigateByUrl(this.authService.isAuthEnabled ? '/auth/login' : '/dashboard');
-        return;
-    }
+    if (AuthStatus.checking) return;
+    this.router.navigateByUrl('/dashboard');
   });
 }

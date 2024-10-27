@@ -1,5 +1,5 @@
 export const environment = {
   baseUrl: 'http://localhost:3000',
-  isAuthEnabled: false,
+  isAuthEnabled: true,
   socketUrl: 'ws://localhost:3000',
 };

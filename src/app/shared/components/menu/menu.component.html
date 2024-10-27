@@ -4,11 +4,11 @@
   </div>
 </p-toolbar>
 
-<p-menubar [model]="menuItems" class="custom-menubar">
-  <!-- <button (click)="onLogin()" *ngIf="!isUserAuthenticated">
-    Iniciar Sesión
-  </button> -->
+<p-menubar [model]="menuItems">
+  <button (click)="onLogin()" *ngIf="!isUserAuthenticated">
+    Iniciar sesión
+  </button>
   <button (click)="onLogout()" *ngIf="isUserAuthenticated">
-    Cerrar Sesión
+    Cerrar sesión
   </button>
 </p-menubar>

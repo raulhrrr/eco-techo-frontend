@@ -9,6 +9,8 @@ import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { ChartsComponent } from './pages/charts/charts.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ParameterizationComponent } from './pages/parameterization/parameterization.component';
+import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -16,13 +18,15 @@ import { ParameterizationComponent } from './pages/parameterization/parameteriza
     HomeComponent,
     GaugeComponent,
     ChartsComponent,
-    ParameterizationComponent
+    ParameterizationComponent,
+    DashboardLayoutComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     PrimeNgModule,
     NgxGaugeModule,
+    SharedModule,
     DashboardRoutingModule,
     FormsModule
   ]

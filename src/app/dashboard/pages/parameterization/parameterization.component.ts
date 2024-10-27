@@ -22,9 +22,12 @@ export class ParameterizationComponent {
   initParameterization() {
     this.telemetryService.getTelemetryParameterization().subscribe({
       next: (parameterization) => {
-        parameterization.forEach(param => {
-          this.parameters.push(this.createParameterForm(param));
+        parameterization.sort((firstParam, secondParam) => {
+          if (firstParam.label < secondParam.label) return -1;
+          if (firstParam.label > secondParam.label) return 1;
+          return 0;
         });
+        parameterization.forEach(param => this.parameters.push(this.createParameterForm(param)));
       }
     });
   }
@@ -49,8 +52,8 @@ export class ParameterizationComponent {
     if (parameter.form.valid) {
       const { id, minValue, maxValue, lowerThreshold, upperThreshold } = parameter.form.value;
       this.telemetryService.updateTelemetryParameterization(id, parameter.label, minValue, maxValue, lowerThreshold, upperThreshold).subscribe({
-        next: response => Swal.fire('Éxito', response.message, 'success'),
-        error: () => Swal.fire('Error', 'Ocurrió un error al actualizar el parámetro', 'error')
+        next: ({ message }) => { Swal.fire('Éxito', message, 'success'); },
+        error: () => { Swal.fire('Error', 'Ocurrió un error al actualizar el parámetro', 'error'); }
       });
     }
   }

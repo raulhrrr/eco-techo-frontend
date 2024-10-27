@@ -20,31 +20,35 @@ export class MenuComponent {
   }
 
   ngOnInit() {
+    this.updateMenuItems();
+  }
+
+  updateMenuItems() {
     this.menuItems = [
       {
         label: 'Inicio',
         icon: 'pi pi-home',
-        routerLink: 'dashboard/home',
+        routerLink: '/dashboard/home',
         routerLinkActiveOptions: { exact: true },
       },
       {
         label: 'Telemetría',
         icon: 'pi pi-gauge',
-        routerLink: 'dashboard/gauge',
+        routerLink: '/dashboard/gauge',
         routerLinkActiveOptions: { exact: true },
       },
       {
         label: 'Gráficos',
         icon: 'pi pi-chart-line',
-        routerLink: 'dashboard/charts',
-        routerLinkActiveOptions: { exact: true }
+        routerLink: '/dashboard/charts',
+        routerLinkActiveOptions: { exact: true },
       },
       {
         label: 'Parametrización',
         icon: 'pi pi-cog',
-        routerLink: 'dashboard/parameterization',
+        routerLink: '/dashboard/parameterization',
         routerLinkActiveOptions: { exact: true },
-        // visible: this.isUserAuthenticated,
+        visible: this.isUserAuthenticated,
       },
     ];
   }
@@ -55,5 +59,7 @@ export class MenuComponent {
 
   onLogout() {
     this.authService.logout();
+    this.updateMenuItems();
+    this.router.navigateByUrl('/dashboard');
   }
 }

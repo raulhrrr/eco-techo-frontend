@@ -49,9 +49,9 @@ export class GaugeComponent {
           return;
         };
 
-        parameterization.forEach(({ label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold }) => {
-          this.gauges.push(this.generateGaugeOptions(label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold));
-        });
+        parameterization.forEach(({ label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold }) =>
+          this.gauges.push(this.generateGaugeOptions(label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold))
+        );
         this.setGaugesToLocalStorage();
       },
       error: () => {
@@ -71,12 +71,13 @@ export class GaugeComponent {
     this.gauges.forEach(gauge => {
       const parameter = parameterization.find(param => param.label === gauge.label);
       if (parameter) {
-        gauge.min = parameter.minValue;
-        gauge.max = parameter.maxValue;
-        gauge.lowerThreshold = parameter.lowerThreshold;
-        gauge.upperThreshold = parameter.upperThreshold;
-        gauge.thresholds = this.generateThresholds(parameter.minValue, parameter.maxValue);
-        gauge.markers = this.generateMarkers(parameter.minValue, parameter.maxValue);
+        const { minValue, maxValue, lowerThreshold, upperThreshold } = parameter;
+        gauge.min = minValue;
+        gauge.max = maxValue;
+        gauge.lowerThreshold = lowerThreshold;
+        gauge.upperThreshold = upperThreshold;
+        gauge.thresholds = this.generateThresholds(minValue, maxValue);
+        gauge.markers = this.generateMarkers(minValue, maxValue);
       }
     });
     this.setGaugesToLocalStorage();

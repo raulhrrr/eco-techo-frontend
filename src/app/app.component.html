@@ -2,9 +2,4 @@
   Loading
 </h1>
 
-
-<!-- <shared-menu *ngIf="isUserAuthenticated"></shared-menu> -->
-<shared-menu></shared-menu>
-<div class="mt-4">
-  <router-outlet *ngIf="finishedAuthCheck()" />
-</div>
+<router-outlet *ngIf="finishedAuthCheck()" />
