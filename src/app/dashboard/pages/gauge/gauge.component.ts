@@ -38,7 +38,7 @@ export class GaugeComponent {
 
   private updateGaugeValue(label: string, value: number) {
     const gauge = this.gauges.find(gauge => gauge.label === label);
-    if (gauge) gauge.value = value
+    if (gauge) gauge.value = Number(value.toFixed(2));
   }
 
   initGaugeOptions() {
@@ -94,7 +94,7 @@ export class GaugeComponent {
 
   generateGaugeOptions(label: string, value: number, append: string, min: number, max: number, lowerThreshold: number, upperThreshold: number) {
     return {
-      label, value, min, max, append, thresholds: this.generateThresholds(min, max), markers: this.generateMarkers(min, max), lowerThreshold, upperThreshold
+      label, value: Number(value.toFixed(2)), min, max, append, thresholds: this.generateThresholds(min, max), markers: this.generateMarkers(min, max), lowerThreshold, upperThreshold
     }
   }
 
