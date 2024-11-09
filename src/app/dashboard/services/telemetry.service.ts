@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { environment } from 'src/environments/environment';
-import { groupBy, TelemetryData, TelemetryDataFiltered, TelemetryParameterization, TelemetryResponse } from '../interfaces';
+import { Alert, groupBy, SensorTelemetryData, TelemetryDataFiltered, TelemetryParameterization, TelemetryResponse } from '../interfaces';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -43,7 +43,7 @@ export class TelemetryService {
     }
   }
 
-  onTelemetryData(): Observable<TelemetryData> {
+  onTelemetryData(): Observable<SensorTelemetryData> {
     return new Observable(observer => {
       this.socket.on('telemetryData', data => {
         observer.next(data);
@@ -75,8 +75,15 @@ export class TelemetryService {
     });
   }
 
-  updateTelemetryParameterization(id: string, label: string, minValue: number, maxValue: number, lowerThreshold: number, upperThreshold: number): Observable<TelemetryResponse> {
+  updateTelemetryParameterization(id: string, label: string, minValue: number, maxValue: number, lowerThreshold: number, upperThreshold: number, isAlertEnabled: boolean): Observable<TelemetryResponse> {
     const url = `${environment.baseUrl}/api/telemetry/parameterization`;
-    return this.http.patch<TelemetryResponse>(url, { id, label, minValue, maxValue, lowerThreshold, upperThreshold });
+    return this.http.patch<TelemetryResponse>(url, { id, label, minValue, maxValue, lowerThreshold, upperThreshold, isAlertEnabled });
+  }
+
+  getAlerts(initDate: string, endDate: string): Observable<Alert[]> {
+    const url = `${environment.baseUrl}/api/telemetry/alerts`;
+    return this.http.get<Alert[]>(url, {
+      params: { initDate, endDate }
+    });
   }
 }

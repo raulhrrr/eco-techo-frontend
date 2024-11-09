@@ -44,6 +44,12 @@ export class MenuComponent {
         routerLinkActiveOptions: { exact: true },
       },
       {
+        label: 'Alertas',
+        icon: 'pi pi-bell',
+        routerLink: '/dashboard/alerts',
+        routerLinkActiveOptions: { exact: true },
+      },
+      {
         label: 'Parametrización',
         icon: 'pi pi-cog',
         routerLink: '/dashboard/parameterization',

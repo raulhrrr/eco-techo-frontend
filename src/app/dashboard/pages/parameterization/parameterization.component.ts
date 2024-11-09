@@ -32,7 +32,7 @@ export class ParameterizationComponent {
     });
   }
 
-  createParameterForm({ id, label, minValue, maxValue, lowerThreshold, upperThreshold }: TelemetryParameterization) {
+  createParameterForm({ id, label, minValue, maxValue, lowerThreshold, upperThreshold, isAlertEnabled }: TelemetryParameterization) {
     return {
       form: this.fb.group({
         id: [id],
@@ -40,7 +40,8 @@ export class ParameterizationComponent {
         minValue: [minValue, [Validators.required]],
         maxValue: [maxValue, [Validators.required]],
         lowerThreshold: [lowerThreshold, [Validators.required]],
-        upperThreshold: [upperThreshold, [Validators.required]]
+        upperThreshold: [upperThreshold, [Validators.required]],
+        isAlertEnabled: [isAlertEnabled, [Validators.required]],
       }, {
         validators: [minValueLessThanMaxValueValidator(), thresholdBetweenMinMaxValidator()]
       }),
@@ -50,8 +51,8 @@ export class ParameterizationComponent {
 
   onParameterSubmit(parameter: any) {
     if (parameter.form.valid) {
-      const { id, minValue, maxValue, lowerThreshold, upperThreshold } = parameter.form.value;
-      this.telemetryService.updateTelemetryParameterization(id, parameter.label, minValue, maxValue, lowerThreshold, upperThreshold).subscribe({
+      const { id, minValue, maxValue, lowerThreshold, upperThreshold, isAlertEnabled } = parameter.form.value;
+      this.telemetryService.updateTelemetryParameterization(id, parameter.label, minValue, maxValue, lowerThreshold, upperThreshold, isAlertEnabled).subscribe({
         next: ({ message }) => { Swal.fire('Éxito', message, 'success'); },
         error: ({ message }) => { Swal.fire('Error', message, 'error'); }
       });

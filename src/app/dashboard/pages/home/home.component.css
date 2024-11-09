@@ -3,12 +3,14 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+  max-height: 500px;
+  overflow: hidden;
 }
 
 .carousel-image {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .p-carousel-caption {
@@ -19,4 +21,10 @@
   background-color: rgba(0, 0, 0, 0.8);
   padding: 5px 1rem;
   border-radius: 3px;
+}
+
+ul,
+li {
+  font-family: Poppins-Regular;
+  list-style-type: disc;
 }

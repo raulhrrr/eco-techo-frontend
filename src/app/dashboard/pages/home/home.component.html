@@ -6,20 +6,39 @@
   </div>
   <div class="flex justify-center">
     <div class="col-12 md-8">
-      <p-carousel [value]="images" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+      <p-carousel [value]="mediaItems" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
         <ng-template pTemplate="item" let-item>
           <div class="carousel-item-container">
-            <img [src]="item.source" [alt]="item.alt" class="carousel-image">
-            <div class="p-carousel-caption">{{ item.title }}</div>
+            <ng-container *ngIf="isImage(item.source); else videoTemplate">
+              <img [src]="item.source" [alt]="item.alt" class="carousel-image">
+            </ng-container>
+            <ng-template #videoTemplate>
+              <video controls class="carousel-video">
+                <source [src]="item.source" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </ng-template>
           </div>
         </ng-template>
       </p-carousel>
     </div>
   </div>
-  <div class="flex justify-center">
+  <div class="flex flex-column justify-content-center">
     <div class="col-12 md-8">
       <p-card header="Descripción">
         <p>{{ description }}</p>
+      </p-card>
+    </div>
+    <div class="col-12 md-8">
+      <p-card header="Objetivo general">
+        <p>{{ general_objective }}</p>
+      </p-card>
+    </div>
+    <div class="col-12 md-8">
+      <p-card header="Objetivos específicos">
+        <ul>
+          <li class="ml-4" *ngFor="let objective of specific_objectives">{{ objective }}</li>
+        </ul>
       </p-card>
     </div>
   </div>

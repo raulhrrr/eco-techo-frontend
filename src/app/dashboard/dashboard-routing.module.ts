@@ -6,6 +6,8 @@ import { ChartsComponent } from './pages/charts/charts.component';
 import { ParameterizationComponent } from './pages/parameterization/parameterization.component';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { isAuthenticatedGuard } from '../auth/guards';
+import { AlertsComponent } from './pages/alerts/alerts.component';
+import { UsersComponent } from './pages/users/users.component';
 
 const routes: Routes = [
   {
@@ -15,7 +17,9 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent, },
       { path: 'gauge', component: GaugeComponent, },
       { path: 'charts', component: ChartsComponent, },
-      { path: 'parameterization', canActivate: [isAuthenticatedGuard], component: ParameterizationComponent },
+      { path: 'alerts', component: AlertsComponent, },
+      { path: 'users', canActivate: [isAuthenticatedGuard], component: UsersComponent, },
+      { path: 'parameterization', canActivate: [isAuthenticatedGuard], component: ParameterizationComponent, },
       { path: '**', redirectTo: 'home', },
     ],
   },

@@ -27,6 +27,10 @@
           <label class="block mb-2" for="upperThreshold">Umbral superior</label>
           <input pInputText id="upperThreshold" formControlName="upperThreshold" type="number" class="w-full">
         </div>
+        <div class="p-field mb-4 flex justify-content-between">
+          <label class="mb-2" for="isAlertEnabled">Alerta activada</label>
+          <input id="isAlertEnabled" formControlName="isAlertEnabled" type="checkbox">
+        </div>
         <div class="p-field mb-4">
           <p-button type="submit" label="Actualizar" [disabled]="parameter.form.invalid" class="w-full"></p-button>
         </div>

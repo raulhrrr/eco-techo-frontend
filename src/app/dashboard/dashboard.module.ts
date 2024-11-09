@@ -11,6 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ParameterizationComponent } from './pages/parameterization/parameterization.component';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { SharedModule } from '../shared/shared.module';
+import { AlertsComponent } from './pages/alerts/alerts.component';
+import { UsersComponent } from './pages/users/users.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { SharedModule } from '../shared/shared.module';
     GaugeComponent,
     ChartsComponent,
     ParameterizationComponent,
-    DashboardLayoutComponent
+    DashboardLayoutComponent,
+    AlertsComponent,
+    UsersComponent
   ],
   imports: [
     CommonModule,

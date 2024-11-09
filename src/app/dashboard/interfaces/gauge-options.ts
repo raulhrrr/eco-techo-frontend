@@ -18,4 +18,5 @@ export interface GaugeOptions {
   markers: { [key: string]: Marker };
   lowerThreshold: number;
   upperThreshold: number;
+  isAlertEnabled: boolean;
 }

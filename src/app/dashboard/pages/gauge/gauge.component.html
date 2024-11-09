@@ -10,17 +10,32 @@
           cap="butt"></ngx-gauge>
       </div>
       <div class="mt-3">
-        <div class="mt-2">
-          <p><b>Valor mínimo:</b> {{ gauge.min | number: '1.2-2' }} <b>{{ gauge.append }}</b></p>
+        <div class="mt-2 flex align-items-center justify-content-between">
+          <p><b>Estado:</b></p>
+          <div [ngClass]="{
+            'led-red': gauge.value < gauge.lowerThreshold || gauge.value > gauge.upperThreshold,
+            'led-green': gauge.value >= gauge.lowerThreshold && gauge.value <= gauge.upperThreshold
+            }" class="led"></div>
         </div>
-        <div class="mt-2">
-          <p><b>Valor máximo</b> {{ gauge.max | number: '1.2-2' }} <b>{{ gauge.append }}</b></p>
+        <div class="mt-2 flex justify-content-between">
+          <p><b>Valor mínimo: </b></p>
+          <p>{{ gauge.min | number: '1.2-2' }} <b>{{ gauge.append }}</b></p>
         </div>
-        <div class="mt-2">
-          <p><b>Umbral inferior:</b> {{ gauge.lowerThreshold | number: '1.2-2' }} <b>{{ gauge.append }}</b></p>
+        <div class="mt-2 flex justify-content-between">
+          <p><b>Valor máximo: </b></p>
+          <p>{{ gauge.max | number: '1.2-2' }} <b>{{ gauge.append }}</b></p>
         </div>
-        <div class="mt-2">
-          <p><b>Umbral superior:</b> {{ gauge.upperThreshold | number: '1.2-2' }} <b>{{ gauge.append }}</b></p>
+        <div class="mt-2 flex justify-content-between">
+          <p><b>Umbral inferior: </b></p>
+          <p>{{ gauge.lowerThreshold | number: '1.2-2' }} <b>{{ gauge.append }}</b></p>
+        </div>
+        <div class="mt-2 flex justify-content-between">
+          <p><b>Umbral superior: </b></p>
+          <p>{{ gauge.upperThreshold | number: '1.2-2' }} <b>{{ gauge.append }}</b></p>
+        </div>
+        <div class="mt-2 flex justify-content-between">
+          <p><b>Alerta activada: </b></p>
+          <p><b>{{ gauge.isAlertEnabled ? 'Sí' : 'No' }}</b></p>
         </div>
       </div>
     </p-card>

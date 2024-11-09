@@ -7,7 +7,21 @@ import { MEASUREMENT_VARIABLES } from 'src/app/constants/measurement-variables';
 @Component({
   selector: 'app-gauge',
   templateUrl: './gauge.component.html',
-  styles: ``
+  styles: `
+    .led {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+    }
+
+    .led-red {
+      background-color: #cb3234;
+    }
+
+    .led-green {
+      background-color: #008f39;
+    }
+  `
 })
 export class GaugeComponent {
   gauges: GaugeOptions[] = [];
@@ -49,17 +63,17 @@ export class GaugeComponent {
           return;
         };
 
-        parameterization.forEach(({ label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold }) =>
-          this.gauges.push(this.generateGaugeOptions(label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold))
+        parameterization.forEach(({ label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold, isAlertEnabled }) =>
+          this.gauges.push(this.generateGaugeOptions(label, initialValue, append, minValue, maxValue, lowerThreshold, upperThreshold, isAlertEnabled))
         );
         this.setGaugesToLocalStorage();
       },
       error: () => {
         this.gauges = [
-          this.generateGaugeOptions(MEASUREMENT_VARIABLES.TEMPERATURE, 0, '°C', 0, 50, 0, 0),
-          this.generateGaugeOptions(MEASUREMENT_VARIABLES.HUMIDITY, 0, '%', 0, 100, 0, 0),
-          this.generateGaugeOptions(MEASUREMENT_VARIABLES.PRESSURE, 0, 'hPa', 0, 1000, 0, 0),
-          this.generateGaugeOptions(MEASUREMENT_VARIABLES.GAS_RESISTANCE, 0, 'KΩ', 0, 100, 0, 0),
+          this.generateGaugeOptions(MEASUREMENT_VARIABLES.TEMPERATURE, 0, '°C', 0, 50, 0, 0, false),
+          this.generateGaugeOptions(MEASUREMENT_VARIABLES.HUMIDITY, 0, '%', 0, 100, 0, 0, false),
+          this.generateGaugeOptions(MEASUREMENT_VARIABLES.PRESSURE, 0, 'hPa', 0, 1000, 0, 0, false),
+          this.generateGaugeOptions(MEASUREMENT_VARIABLES.GAS_RESISTANCE, 0, 'KΩ', 0, 100, 0, 0, false),
         ]
 
         this.setGaugesToLocalStorage();
@@ -71,13 +85,14 @@ export class GaugeComponent {
     this.gauges.forEach(gauge => {
       const parameter = parameterization.find(param => param.label === gauge.label);
       if (parameter) {
-        const { minValue, maxValue, lowerThreshold, upperThreshold } = parameter;
+        const { minValue, maxValue, lowerThreshold, upperThreshold, isAlertEnabled } = parameter;
         gauge.min = minValue;
         gauge.max = maxValue;
         gauge.lowerThreshold = lowerThreshold;
         gauge.upperThreshold = upperThreshold;
         gauge.thresholds = this.generateThresholds(minValue, maxValue);
         gauge.markers = this.generateMarkers(minValue, maxValue);
+        gauge.isAlertEnabled = isAlertEnabled;
       }
     });
     this.setGaugesToLocalStorage();
@@ -92,9 +107,9 @@ export class GaugeComponent {
     this.gauges = storedGauges ? JSON.parse(storedGauges) : this.gauges;
   }
 
-  generateGaugeOptions(label: string, value: number, append: string, min: number, max: number, lowerThreshold: number, upperThreshold: number) {
+  generateGaugeOptions(label: string, value: number, append: string, min: number, max: number, lowerThreshold: number, upperThreshold: number, isAlertEnabled: boolean) {
     return {
-      label, value: Number(value.toFixed(2)), min, max, append, thresholds: this.generateThresholds(min, max), markers: this.generateMarkers(min, max), lowerThreshold, upperThreshold
+      label, value: Number(value.toFixed(2)), min, max, append, thresholds: this.generateThresholds(min, max), markers: this.generateMarkers(min, max), lowerThreshold, upperThreshold, isAlertEnabled
     }
   }
 

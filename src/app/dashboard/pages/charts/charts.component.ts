@@ -1,5 +1,5 @@
 import { Component, HostListener, inject, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { getFormattedDate, getDayOrHourFromDate } from 'src/app/utils/date-utils';
 import { TelemetryService } from '../../services/telemetry.service';
 import { ChartType, groupBy, TelemetryDataFiltered } from '../../interfaces';
@@ -13,35 +13,23 @@ import { UIChart } from 'primeng/chart';
 })
 export class ChartsComponent {
   @ViewChild('chart') chartComponent!: UIChart;
-  form: FormGroup;
-  fb = inject(FormBuilder);
   telemetryService = inject(TelemetryService);
   currentDate!: string;
-  chartTypes: ChartType[];
+  chartTypes: ChartType[] = [
+    { label: 'Líneas', value: 'line' },
+    { label: 'Barras', value: 'bar' },
+    // { label: 'Circular', value: 'pie' },
+    // { label: 'Dona', value: 'doughnut' },
+    // { label: 'Polar', value: 'polarArea' },
+    // { label: 'Radar', value: 'radar' }
+  ];
   selectedChartType: string = 'line';
 
   chartData!: ChartData;
   chartOptions!: ChartOptions;
 
-  constructor() {
-    this.form = this.fb.group({
-      initDate: ['', Validators.required],
-      endDate: ['', Validators.required]
-    });
-
-    this.chartTypes = [
-      { label: 'Líneas', value: 'line' },
-      { label: 'Barras', value: 'bar' },
-      // { label: 'Circular', value: 'pie' },
-      // { label: 'Dona', value: 'doughnut' },
-      // { label: 'Polar', value: 'polarArea' },
-      // { label: 'Radar', value: 'radar' }
-    ];
-  }
-
   ngOnInit() {
     this.initializeCharOptions();
-    this.initializeFormData();
     this.initializeChartData();
   }
 
@@ -63,6 +51,7 @@ export class ChartsComponent {
   }
 
   private initializeChartData() {
+    this.currentDate = getFormattedDate();
     this.telemetryService.getFilteredTelemetryData(this.currentDate, this.currentDate, 'hour').subscribe({
       next: data => {
         this.populateChartData(data, 'hour');
@@ -79,21 +68,6 @@ export class ChartsComponent {
       }
     });
 
-  }
-
-  private initializeFormData() {
-    this.currentDate = getFormattedDate();
-    this.form.patchValue({ initDate: this.currentDate, endDate: this.currentDate });
-  }
-
-  dateValidator(form: AbstractControl): ValidationErrors | null {
-    const initDate = form.get('initDate')?.value;
-    const endDate = form.get('endDate')?.value;
-
-    if (initDate > endDate) {
-      return { dateError: true }
-    }
-    return null;
   }
 
   private populateChartData(data: TelemetryDataFiltered[], groupBy: groupBy) {
@@ -137,9 +111,9 @@ export class ChartsComponent {
     this.chartComponent.refresh();
   }
 
-  onSubmit() {
-    if (this.form.valid) {
-      let { initDate, endDate } = this.form.value;
+  onSubmit(form: FormGroup) {
+    if (form.valid) {
+      let { initDate, endDate } = form.value;
       initDate = getFormattedDate(initDate);
       endDate = getFormattedDate(endDate);
 

@@ -1,6 +1,6 @@
 export type groupBy = 'day' | 'hour';
 
-export interface TelemetryData {
+export interface SensorTelemetryData {
   temperature: number;
   humidity: number;
   pressure: number;
@@ -15,6 +15,22 @@ export interface TelemetryDataFiltered {
   avg_gas_resistance: number;
 }
 
+export interface Alert {
+  id: string;
+  message: string;
+  telemetryDataId: string;
+  timestamp: Date;
+  telemetryData: TelemetryData;
+}
+
+export interface TelemetryData {
+  id: string;
+  telemetryParamId: string;
+  value: number;
+  timestamp: Date;
+  telemetryParameterization: TelemetryParameterization;
+}
+
 export interface TelemetryParameterization {
   id: string;
   label: string;
@@ -24,6 +40,9 @@ export interface TelemetryParameterization {
   maxValue: number;
   lowerThreshold: number;
   upperThreshold: number;
+  isAlertEnabled: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface TelemetryResponse {
