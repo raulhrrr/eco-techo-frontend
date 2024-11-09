@@ -68,14 +68,20 @@ export class GaugeComponent {
         );
         this.setGaugesToLocalStorage();
       },
+      complete: () => {
+        this.gauges.sort((firstGauge, secondGauge) => {
+          if (firstGauge.label < secondGauge.label) return -1;
+          if (firstGauge.label > secondGauge.label) return 1;
+          return 0;
+        });
+      },
       error: () => {
         this.gauges = [
           this.generateGaugeOptions(MEASUREMENT_VARIABLES.TEMPERATURE, 0, '°C', 0, 50, 0, 0, false),
           this.generateGaugeOptions(MEASUREMENT_VARIABLES.HUMIDITY, 0, '%', 0, 100, 0, 0, false),
           this.generateGaugeOptions(MEASUREMENT_VARIABLES.PRESSURE, 0, 'hPa', 0, 1000, 0, 0, false),
           this.generateGaugeOptions(MEASUREMENT_VARIABLES.GAS_RESISTANCE, 0, 'KΩ', 0, 100, 0, 0, false),
-        ]
-
+        ];
         this.setGaugesToLocalStorage();
       }
     });
