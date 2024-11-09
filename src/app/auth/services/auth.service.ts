@@ -9,6 +9,7 @@ import {
   LoginResponse,
   User,
 } from '../interfaces';
+import { TelemetryResponse } from 'src/app/dashboard/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -53,12 +54,11 @@ export class AuthService {
     );
   }
 
-  register(name: string, email: string, password: string): Observable<boolean> {
+  register(name: string, email: string, password: string, roleId: number): Observable<TelemetryResponse> {
     const url = `${this.baseUrl}/api/auth/register`;
-    const body = { name, email, password };
+    const body = { name, email, password, roleId };
 
-    return this.http.post<LoginResponse>(url, body).pipe(
-      map(({ user, token }) => this.setAuthentication(user, token)),
+    return this.http.post<TelemetryResponse>(url, body).pipe(
       catchError((err) => throwError(() => err.error.message)),
     );
   }

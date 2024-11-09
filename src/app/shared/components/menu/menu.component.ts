@@ -50,6 +50,13 @@ export class MenuComponent {
         routerLinkActiveOptions: { exact: true },
       },
       {
+        label: 'Usuarios',
+        icon: 'pi pi-users',
+        routerLink: '/dashboard/users',
+        routerLinkActiveOptions: { exact: true },
+        visible: this.isUserAuthenticated,
+      },
+      {
         label: 'Parametrización',
         icon: 'pi pi-cog',
         routerLink: '/dashboard/parameterization',

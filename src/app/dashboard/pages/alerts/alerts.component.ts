@@ -53,13 +53,8 @@ export class AlertsComponent implements OnInit {
 
   private getAlerts(initDate: string, endDate: string) {
     this.telemetryService.getAlerts(initDate, endDate).subscribe({
-      next: data => {
-        this.alerts = data;
-        console.log(this.alerts)
-      },
-      error: () => {
-        this.alerts = [];
-      }
+      next: data => this.alerts = data,
+      error: () => this.alerts = []
     });
   }
 }

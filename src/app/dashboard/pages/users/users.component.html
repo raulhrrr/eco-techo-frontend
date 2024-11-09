@@ -1,1 +1,33 @@
-<p>users works!</p>
+<div class="grid justify-content-center">
+  <div class="col-12">
+    <h2 class="text-center">Crear Usuario</h2>
+  </div>
+  <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-4">
+    <div class="flex justify-content-center mb-4">
+      <form autocomplete="off" [formGroup]="form" (ngSubmit)="onSave()" class="p-fluid w-full">
+        <div class="p-field mb-4">
+          <label class="block mb-2" for="name">Nombre</label>
+          <input pInputText id="name" formControlName="name" type="text" placeholder="Nombre" class="w-full">
+        </div>
+        <div class="p-field mb-4">
+          <label class="block mb-2" for="email">Correo</label>
+          <input pInputText id="email" formControlName="email" type="email" placeholder="Correo electrónico"
+            class="w-full">
+        </div>
+        <div class="p-field mb-4">
+          <label class="block mb-2" for="role">Rol</label>
+          <p-dropdown formControlName="role" [options]="roles" optionLabel="name" placeholder="Seleccione un rol"
+            class="w-full"></p-dropdown>
+        </div>
+        <div class="p-field mb-4" *ngIf="isAdminRole">
+          <label class="block mb-2" for="password">Contraseña</label>
+          <input pInputText id="password" formControlName="password" type="password" placeholder="Contraseña"
+            class="w-full" [disabled]="!isAdminRole">
+        </div>
+        <div class="p-field mb-4">
+          <p-button type="submit" label="Guardar" [disabled]="form.invalid" class="w-full"></p-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
