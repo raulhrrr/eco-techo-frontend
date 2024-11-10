@@ -71,44 +71,22 @@ export class ChartsComponent {
   }
 
   private populateChartData(data: TelemetryDataFiltered[], groupBy: groupBy) {
+    const fill = false;
+    const tension = 0.4;
     this.chartData = {
       labels: data.map(d => getDayOrHourFromDate(d.groupedDate, groupBy)),
       datasets: [
-        {
-          label: 'Promedio temperatura',
-          data: data.map(d => d.avg_temperature),
-          fill: false,
-          borderColor: '#42A5F5',
-          backgroundColor: '#42A5F5',
-          tension: 0.4
-        },
-        {
-          label: 'Promedio humedad',
-          data: data.map(d => d.avg_humidity),
-          fill: false,
-          borderColor: '#FFA726',
-          backgroundColor: '#FFA726',
-          tension: 0.4
-        },
-        {
-          label: 'Promedio presión',
-          data: data.map(d => d.avg_pressure),
-          fill: false,
-          borderColor: '#66BB6A',
-          backgroundColor: '#66BB6A',
-          tension: 0.4
-        },
-        {
-          label: 'Promedio resistencia al gas',
-          data: data.map(d => d.avg_gas_resistance),
-          fill: false,
-          borderColor: '#EF5350',
-          backgroundColor: '#EF5350',
-          tension: 0.4
-        }
+        this.generateDataset('Promedio temperatura', data.map(d => d.avg_temperature), fill, '#42A5F5', tension),
+        this.generateDataset('Promedio humedad', data.map(d => d.avg_humidity), fill, '#FFA726', tension),
+        this.generateDataset('Promedio presión', data.map(d => d.avg_pressure), fill, '#66BB6A', tension),
+        this.generateDataset('Promedio resistencia al gas', data.map(d => d.avg_gas_resistance), fill, '#EF5350', tension)
       ]
     };
     this.chartComponent.refresh();
+  }
+
+  generateDataset(label: string, data: number[], fill: boolean, color: string, tension: number) {
+    return { label, data, fill, borderColor: color, backgroundColor: color, tension };
   }
 
   onSubmit(form: FormGroup) {
