@@ -13,7 +13,8 @@ interface Image {
 })
 export class HomeComponent implements OnInit {
   title = 'Bienvenido al Sistema de Telemetría del Humedal de Techo Uniagustiniana Proyecto de Proyección Social 2024';
-  mediaItems: Image[] = [];
+  images: Image[] = [];
+  video = 'assets/videos/VID_01.mp4';
   description = 'El Humedal de Techo representa un ecosistema vital para la comunidad de Santa Catalina, desempeñando un papel crucial en la regulación del clima local, la preservación de la biodiversidad y el suministro de servicios ambientales esenciales. Sin embargo, el crecimiento urbano y el impacto humano han puesto en riesgo su integridad. En respuesta a esta problemática, el Sistema de Telemetría del Humedal de Techo surge como una iniciativa para monitorear en tiempo real el estado del humedal, utilizando tecnologías avanzadas como sensores, ciencia de datos e inteligencia artificial.';
   general_objective = 'Difundir y concientizar el estado actual del humedal de Techo entre los residentes de la comunidad de Santa Catalina para que propendan con el cuidado de este utilizando diferentes sensores, la ciencia de datos, la inteligencia artificial y los sistemas de monitoreo ambiental en tiempo real en pro para la conservación de las áreas del humedal de techo.';
   specific_objectives = [
@@ -24,23 +25,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     for(let i = 1; i <= 34; i++) {
       const imageIndex = i < 10 ? '0' + i : i;
-      this.mediaItems.push({
+      this.images.push({
         source: `assets/images/carousel/IMG_${imageIndex}.jpeg`,
         alt: `Imagen ${imageIndex}`
       });
     }
-
-    // for(let i = 1; 1 <= 3; i++) {
-    //   const imageIndex = '0' + i;
-    //   this.mediaItems.push({
-    //     source: `assets/videos/carousel/VID_${imageIndex}.mp4`,
-    //     alt: `Video ${imageIndex}`
-    //   });
-    // }
-  }
-
-  isImage(source: string): boolean {
-    return /\.(jpg|jpeg|png|gif)$/i.test(source);
   }
 
   getImageData(source: string, text: string): Image {
