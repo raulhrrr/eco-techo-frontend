@@ -2,6 +2,7 @@ import { Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'shared-menu',
@@ -24,46 +25,19 @@ export class MenuComponent {
   }
 
   updateMenuItems() {
+    const isMenuVisible = this.isUserAuthenticated || !environment.production;
     this.menuItems = [
-      {
-        label: 'Inicio',
-        icon: 'pi pi-home',
-        routerLink: '/dashboard/home',
-        routerLinkActiveOptions: { exact: true },
-      },
-      {
-        label: 'Telemetría',
-        icon: 'pi pi-gauge',
-        routerLink: '/dashboard/gauge',
-        routerLinkActiveOptions: { exact: true },
-      },
-      {
-        label: 'Gráficos',
-        icon: 'pi pi-chart-line',
-        routerLink: '/dashboard/charts',
-        routerLinkActiveOptions: { exact: true },
-      },
-      {
-        label: 'Alertas',
-        icon: 'pi pi-bell',
-        routerLink: '/dashboard/alerts',
-        routerLinkActiveOptions: { exact: true },
-      },
-      {
-        label: 'Usuarios',
-        icon: 'pi pi-users',
-        routerLink: '/dashboard/users',
-        routerLinkActiveOptions: { exact: true },
-        visible: this.isUserAuthenticated,
-      },
-      {
-        label: 'Parametrización',
-        icon: 'pi pi-cog',
-        routerLink: '/dashboard/parameterization',
-        routerLinkActiveOptions: { exact: true },
-        visible: this.isUserAuthenticated,
-      },
+      this.generateMenuItem('Inicio', 'pi pi-home', '/dashboard/home'),
+      this.generateMenuItem('Telemetría', 'pi pi-gauge', '/dashboard/gauge'),
+      this.generateMenuItem('Gráficos', 'pi pi-chart-line', '/dashboard/charts'),
+      this.generateMenuItem('Alertas', 'pi pi-bell', '/dashboard/alerts'),
+      this.generateMenuItem('Usuarios', 'pi pi-users', '/dashboard/users', isMenuVisible),
+      this.generateMenuItem('Parametrización', 'pi pi-cog', '/dashboard/parameterization', isMenuVisible),
     ];
+  }
+
+  generateMenuItem(label: string, icon: string, routerLink: string, visible = true) {
+    return { label, icon, routerLink, routerLinkActiveOptions: { exact: true }, visible };
   }
 
   onLogin() {
