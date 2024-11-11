@@ -11,7 +11,7 @@
 
   <div class="col-12 md:col-8 lg:col-9 xl:col-9 p-2">
     <div class="mb-4">
-      <p-button label="Exportar" (onClick)="onExport()"></p-button>
+      <p-button label="Exportar" [disabled]="alerts.length === 0" (onClick)="onExport()"></p-button>
     </div>
     <p-table [value]="alerts" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]"
       styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '50rem' }">
