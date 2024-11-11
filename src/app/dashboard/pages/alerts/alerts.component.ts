@@ -25,7 +25,7 @@ export class AlertsComponent implements OnInit {
     if (!this.alerts.length) return;
 
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.alerts.map(alert => ({
-      'Fecha de generación': new Date(alert.timestamp).toLocaleString(),
+      'Fecha de generación': new Date(alert.timestamp),
       'Mensaje': alert.message,
       'Valor': alert.telemetryData.value,
       'Etiqueta': alert.telemetryData.telemetryParameterization.label,
