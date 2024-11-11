@@ -1,16 +1,17 @@
-<h2 class="mb-4">Filtrar Información</h2>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div class="p-field mb-4">
-    <label class="block mb-2" for="initDate">Fecha Inicial</label>
-    <p-calendar [showIcon]="true" [showOnFocus]="false" id="initDate" formControlName="initDate"
-      dateFormat="yy-mm-dd"></p-calendar>
-  </div>
-  <div class="p-field mb-4">
-    <label class="block mb-2" for="endDate">Fecha Final</label>
-    <p-calendar [showIcon]="true" [showOnFocus]="false" id="endDate" formControlName="endDate"
-      dateFormat="yy-mm-dd"></p-calendar>
-  </div>
-  <div class="p-field mb-4">
-    <p-button type="submit" label="Filtrar" [disabled]="form.invalid" class="w-full"></p-button>
-  </div>
-</form>
+<p-panel header="Filtrar Información" [toggleable]="true" [collapsed]="true" expandIcon="pi pi-minus" collapseIcon="pi pi-plus">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="p-field mb-4">
+      <label class="block mb-2" for="initDate">Fecha Inicial</label>
+      <p-calendar [showIcon]="true" [showOnFocus]="false" id="initDate" formControlName="initDate"
+        dateFormat="yy-mm-dd"></p-calendar>
+    </div>
+    <div class="p-field mb-4">
+      <label class="block mb-2" for="endDate">Fecha Final</label>
+      <p-calendar [showIcon]="true" [showOnFocus]="false" id="endDate" formControlName="endDate"
+        dateFormat="yy-mm-dd"></p-calendar>
+    </div>
+    <div class="p-field mb-4">
+      <p-button type="submit" label="Filtrar" [disabled]="form.invalid" class="w-full"></p-button>
+    </div>
+  </form>
+</p-panel>
