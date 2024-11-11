@@ -74,7 +74,7 @@ export class ChartsComponent {
   private generateDescription() {
     const tenDaysAgo = getFormattedDate(new Date(new Date().setDate(new Date().getDate() - 10)));
     this.currentDate = getFormattedDate();
-    this.description = `Si se selecciona un solo día (por ejemplo, del ${this.currentDate} al ${this.currentDate}), se mostrarán los promedios por hora. Si se selecciona un rango de fechas (por ejemplo, del ${tenDaysAgo} al ${this.currentDate}), se mostrarán los promedios por día.`;
+    this.description = `Por defecto, se filtra la información del día actual. Si se selecciona un solo día (por ejemplo, del ${this.currentDate} al ${this.currentDate}), se mostrarán los promedios por hora. Si se selecciona un rango de fechas (por ejemplo, del ${tenDaysAgo} al ${this.currentDate}), se mostrarán los promedios por día.`;
   }
 
   private populateChartData(data: TelemetryDataFiltered[], groupBy: groupBy) {

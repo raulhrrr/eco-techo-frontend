@@ -14,6 +14,7 @@ export class AlertsComponent implements OnInit {
   telemetryService = inject(TelemetryService);
   currentDate!: string;
   alerts: Alert[] = [];
+  description = 'Por defecto, se filtra la información del día actual. Puedes cambiar el rango de fechas para obtener alertas de otros días.';
 
   ngOnInit() {
     this.currentDate = getFormattedDate();
