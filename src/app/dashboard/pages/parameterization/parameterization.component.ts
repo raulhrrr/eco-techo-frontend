@@ -71,7 +71,8 @@ export class ParameterizationComponent {
       const { id, minValue, maxValue, lowerThreshold, upperThreshold, isAlertEnabled } = parameter.form.value;
       this.telemetryService.updateTelemetryParameterization(id, parameter.label, minValue, maxValue, lowerThreshold, upperThreshold, isAlertEnabled).subscribe({
         next: ({ message }) => { Swal.fire('Éxito', message, 'success'); },
-        error: ({ message }) => { Swal.fire('Error', message, 'error'); }
+        error: ({ message }) => { Swal.fire('Error', message, 'error'); },
+        complete: () => { parameter.initialHash = objectHash(parameter.form.getRawValue()); }
       });
     }
   }
