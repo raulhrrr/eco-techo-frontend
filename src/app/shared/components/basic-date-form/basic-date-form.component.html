@@ -1,5 +1,10 @@
-<p-panel header="Filtrar Información" [toggleable]="true" [collapsed]="true" expandIcon="pi pi-minus" collapseIcon="pi pi-plus">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+<p-panel header="Filtrar Información" [toggleable]="true" [collapsed]="true" expandIcon="pi pi-minus"
+  collapseIcon="pi pi-plus">
+  <div class="mb-4">
+    <p><b>Seleccione un rango de fechas para filtrar la información.</b></p>
+    <p *ngIf="description">{{ description }}</p>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-fluid w-full">
     <div class="p-field mb-4">
       <label class="block mb-2" for="initDate">Fecha Inicial</label>
       <p-calendar [showIcon]="true" [showOnFocus]="false" id="initDate" formControlName="initDate"

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { getFormattedDate } from 'src/app/utils/date-utils';
 
@@ -10,6 +10,7 @@ import { getFormattedDate } from 'src/app/utils/date-utils';
 export class BasicDateFormComponent implements OnInit {
   currentDate!: string;
   fb = inject(FormBuilder);
+  @Input() description?: string
   form: FormGroup = this.fb.group({
     initDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]]

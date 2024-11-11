@@ -3,13 +3,13 @@
     <h2 class="text-center">Alertas</h2>
   </div>
 
-  <div class="w-full md:w-4 lg:w-3 xl:w-3 p-2">
+  <div class="col-12 md:col-4 lg:col-3 xl:col-3 p-2">
     <div class="flex justify-content-center">
-      <shared-basic-date-form (onFormSubmit)="onSubmit($event)"></shared-basic-date-form>
+      <shared-basic-date-form class="w-10" (onFormSubmit)="onSubmit($event)"></shared-basic-date-form>
     </div>
   </div>
 
-  <div class="w-full md:w-8 lg:w-9 xl:w-9 p-2">
+  <div class="col-12 md:col-8 lg:col-9 xl:col-9 p-2">
     <div class="mb-4">
       <p-button label="Exportar" (onClick)="onExport()"></p-button>
     </div>

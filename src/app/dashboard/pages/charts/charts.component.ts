@@ -24,11 +24,13 @@ export class ChartsComponent {
     // { label: 'Radar', value: 'radar' }
   ];
   selectedChartType: string = 'line';
+  description = '';
 
   chartData!: ChartData;
   chartOptions!: ChartOptions;
 
   ngOnInit() {
+    this.generateDescription();
     this.initializeCharOptions();
     this.initializeChartData();
   }
@@ -51,7 +53,6 @@ export class ChartsComponent {
   }
 
   private initializeChartData() {
-    this.currentDate = getFormattedDate();
     this.telemetryService.getFilteredTelemetryData(this.currentDate, this.currentDate, 'hour').subscribe({
       next: data => {
         this.populateChartData(data, 'hour');
@@ -68,6 +69,12 @@ export class ChartsComponent {
       }
     });
 
+  }
+
+  private generateDescription() {
+    const tenDaysAgo = getFormattedDate(new Date(new Date().setDate(new Date().getDate() - 10)));
+    this.currentDate = getFormattedDate();
+    this.description = `Si se selecciona un solo día (por ejemplo, del ${this.currentDate} al ${this.currentDate}), se mostrarán los promedios por hora. Si se selecciona un rango de fechas (por ejemplo, del ${tenDaysAgo} al ${this.currentDate}), se mostrarán los promedios por día.`;
   }
 
   private populateChartData(data: TelemetryDataFiltered[], groupBy: groupBy) {
