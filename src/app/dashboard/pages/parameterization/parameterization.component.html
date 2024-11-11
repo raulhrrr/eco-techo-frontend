@@ -32,7 +32,7 @@
           <input id="isAlertEnabled" formControlName="isAlertEnabled" type="checkbox">
         </div>
         <div class="p-field mb-4">
-          <p-button type="submit" label="Actualizar" [disabled]="parameter.form.invalid" class="w-full"></p-button>
+          <p-button type="submit" label="Actualizar" [disabled]="parameter.form.invalid || !parameter.form.dirty" class="w-full"></p-button>
         </div>
       </form>
     </div>
