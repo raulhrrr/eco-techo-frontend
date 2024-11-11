@@ -7,22 +7,23 @@
       <form autocomplete="off" [formGroup]="form" (ngSubmit)="onSave()" class="p-fluid w-10">
         <div class="p-field mb-4">
           <label class="block mb-2" for="name">Nombre</label>
-          <input pInputText id="name" formControlName="name" type="text" placeholder="Nombre" class="w-full">
+          <input pInputText id="name" formControlName="name" type="text" placeholder="Nombre" variant="filled"
+            class="w-full">
         </div>
         <div class="p-field mb-4">
           <label class="block mb-2" for="email">Correo</label>
           <input pInputText id="email" formControlName="email" type="email" placeholder="Correo electrónico"
-            class="w-full">
+            variant="filled" class="w-full">
         </div>
         <div class="p-field mb-4">
           <label class="block mb-2" for="role">Rol</label>
-          <p-dropdown formControlName="role" [options]="roles" optionLabel="name" placeholder="Seleccione un rol"
-            class="w-full"></p-dropdown>
+          <p-dropdown inputId="role" formControlName="role" [options]="roles" optionLabel="name" placeholder="Seleccione un rol"
+            variant="filled" class="w-full"></p-dropdown>
         </div>
         <div class="p-field mb-4" *ngIf="isAdminRole">
           <label class="block mb-2" for="password">Contraseña</label>
-          <input pInputText id="password" formControlName="password" type="password" placeholder="Contraseña"
-            class="w-full" [disabled]="!isAdminRole">
+          <p-password inputId="password" formControlName="password" [feedback]="false" [toggleMask]="true"
+            [disabled]="!isAdminRole" placeholder="Contraseña" variant="filled" class="w-full"></p-password>
         </div>
         <div class="p-field mb-4">
           <p-button type="submit" label="Guardar" [disabled]="form.invalid" class="w-full"></p-button>

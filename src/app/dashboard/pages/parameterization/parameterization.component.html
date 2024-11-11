@@ -8,31 +8,40 @@
         class="p-fluid w-10 md:w-8 lg:w-6 xl:w-6">
         <input type="hidden" formControlName="id">
         <div class="p-field mb-4">
-          <label class="block mb-2" for="label">Parámetro</label>
-          <input pInputText id="label" formControlName="label" type="text" [disabled]="true" class="w-full">
+          <label class="block mb-2" for="label {{ parameter.label }}">Parámetro</label>
+          <input pInputText id="label {{ parameter.label }}" formControlName="label" type="text" [disabled]="true"
+            variant="filled" class="w-full">
         </div>
         <div class="p-field mb-4">
-          <label class="block mb-2" for="minValue">Valor mínimo</label>
-          <input pInputText id="minValue" formControlName="minValue" type="number" class="w-full">
+          <label class="block mb-2" for="minValue {{ parameter.label }}">Valor mínimo</label>
+          <p-inputNumber inputId="minValue {{ parameter.label }}" formControlName="minValue"
+            [suffix]="parameter.measurementUnit" variant="filled" class="w-full"></p-inputNumber>
         </div>
         <div class="p-field mb-4">
-          <label class="block mb-2" for="maxValue">Valor máximo</label>
-          <input pInputText id="maxValue" formControlName="maxValue" type="number" class="w-full">
+          <label class="block mb-2" for="maxValue {{ parameter.label }}">Valor máximo</label>
+          <p-inputNumber inputId="maxValue {{ parameter.label }}" formControlName="maxValue"
+            [suffix]="parameter.measurementUnit" variant="filled" class="w-full"></p-inputNumber>
         </div>
         <div class="p-field mb-4">
-          <label class="block mb-2" for="lowerThreshold">Umbral inferior</label>
-          <input pInputText id="lowerThreshold" formControlName="lowerThreshold" type="number" class="w-full">
+          <label class="block mb-2" for="lowerThreshold {{ parameter.label }}">Umbral inferior</label>
+          <p-inputNumber inputId="lowerThreshold {{ parameter.label }}" formControlName="lowerThreshold"
+            [min]="getControlValue(parameter, 'minValue')" [max]="getControlValue(parameter, 'maxValue')"
+            [suffix]="parameter.measurementUnit" variant="filled" class="w-full"></p-inputNumber>
         </div>
         <div class="p-field mb-4">
-          <label class="block mb-2" for="upperThreshold">Umbral superior</label>
-          <input pInputText id="upperThreshold" formControlName="upperThreshold" type="number" class="w-full">
+          <label class="block mb-2" for="upperThreshold {{ parameter.label }}">Umbral superior</label>
+          <p-inputNumber inputId="upperThreshold {{ parameter.label }}" formControlName="upperThreshold"
+            [min]="getControlValue(parameter, 'minValue')" [max]="getControlValue(parameter, 'maxValue')"
+            [suffix]="parameter.measurementUnit" variant="filled" class="w-full"></p-inputNumber>
         </div>
         <div class="p-field mb-4 flex justify-content-between">
-          <label class="mb-2" for="isAlertEnabled">Alerta activada</label>
-          <input id="isAlertEnabled" formControlName="isAlertEnabled" type="checkbox">
+          <label class="mb-2" for="isAlertEnabled {{ parameter.label }}">Alerta activada</label>
+          <p-checkbox inputId="isAlertEnabled {{ parameter.label }}" formControlName="isAlertEnabled" [binary]="true"
+            variant="filled"></p-checkbox>
         </div>
         <div class="p-field mb-4">
-          <p-button type="submit" label="Actualizar" [disabled]="parameter.form.invalid || !parameter.form.dirty" class="w-full"></p-button>
+          <p-button type="submit" label="Actualizar" [disabled]="parameter.form.invalid || !hasChanges(parameter)"
+            class="w-full"></p-button>
         </div>
       </form>
     </div>

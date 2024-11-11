@@ -13,6 +13,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { PasswordModule } from 'primeng/password';
 
 @NgModule({
   exports: [
@@ -29,6 +32,9 @@ import { TableModule } from 'primeng/table';
     CalendarModule,
     DropdownModule,
     TableModule,
+    CheckboxModule,
+    InputNumberModule,
+    PasswordModule,
   ],
 })
 export class PrimeNgModule { }

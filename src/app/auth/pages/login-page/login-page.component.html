@@ -4,11 +4,13 @@
   </div>
   <div class="p-field mb-4">
     <label class="block mb-2" for="email">Correo</label>
-    <input pInputText id="email" formControlName="email" type="email" placeholder="Correo electrónico" class="w-full">
+    <input pInputText id="email" formControlName="email" type="email" placeholder="Correo electrónico" variant="filled"
+      class="w-full">
   </div>
   <div class="p-field mb-4">
     <label class="block mb-2" for="password">Contraseña</label>
-    <input pInputText id="password" formControlName="password" type="password" placeholder="Contraseña" class="w-full">
+    <p-password inputId="password" formControlName="password" [feedback]="false" [toggleMask]="true"
+      placeholder="Contraseña" variant="filled" class="w-full"></p-password>
   </div>
   <div class="p-field mb-4">
     <p-button type="submit" label="Iniciar sesión" [disabled]="form.invalid" class="w-full"></p-button>

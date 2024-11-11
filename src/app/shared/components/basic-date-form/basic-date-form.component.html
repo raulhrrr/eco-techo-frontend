@@ -7,13 +7,13 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-fluid w-full">
     <div class="p-field mb-4">
       <label class="block mb-2" for="initDate">Fecha Inicial</label>
-      <p-calendar [showIcon]="true" [showOnFocus]="false" id="initDate" formControlName="initDate"
-        dateFormat="yy-mm-dd"></p-calendar>
+      <p-calendar [showIcon]="true" [showOnFocus]="false" inputId="initDate" formControlName="initDate"
+        dateFormat="yy-mm-dd" variant="filled"></p-calendar>
     </div>
     <div class="p-field mb-4">
       <label class="block mb-2" for="endDate">Fecha Final</label>
-      <p-calendar [showIcon]="true" [showOnFocus]="false" id="endDate" formControlName="endDate"
-        dateFormat="yy-mm-dd"></p-calendar>
+      <p-calendar [showIcon]="true" [showOnFocus]="false" inputId="endDate" formControlName="endDate"
+        dateFormat="yy-mm-dd" variant="filled"></p-calendar>
     </div>
     <div class="p-field mb-4">
       <p-button type="submit" label="Filtrar" [disabled]="form.invalid" class="w-full"></p-button>

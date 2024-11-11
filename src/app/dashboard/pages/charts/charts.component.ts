@@ -120,7 +120,7 @@ export class ChartsComponent {
     if (this.chartComponent) this.resetChart();
   }
 
-  onChartTypeChange(event: any) {
+  onChartTypeChange(event: ChartType) {
     this.selectedChartType = event.value;
     this.initializeCharOptions();
     this.resetChart();

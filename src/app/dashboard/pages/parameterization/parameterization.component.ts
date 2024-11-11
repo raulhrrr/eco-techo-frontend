@@ -1,9 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TelemetryService } from '../../services/telemetry.service';
+import objectHash from 'object-hash';
 import { TelemetryParameterization } from '../../interfaces';
 import Swal from 'sweetalert2';
 import { minValueLessThanMaxValueValidator, thresholdBetweenMinMaxValidator } from '../../validators/telemetry-validators';
+
+interface ParameterForm {
+  form: FormGroup;
+  label: string;
+  measurementUnit: string;
+  initialHash: string;
+}
 
 @Component({
   selector: 'app-parameterization',
@@ -13,7 +21,7 @@ import { minValueLessThanMaxValueValidator, thresholdBetweenMinMaxValidator } fr
 export class ParameterizationComponent {
   fb = inject(FormBuilder);
   telemetryService = inject(TelemetryService);
-  parameters: any[] = [];
+  parameters: ParameterForm[] = [];
 
   ngOnInit() {
     this.initParameterization();
@@ -32,24 +40,33 @@ export class ParameterizationComponent {
     });
   }
 
-  createParameterForm({ id, label, minValue, maxValue, lowerThreshold, upperThreshold, isAlertEnabled }: TelemetryParameterization) {
-    return {
-      form: this.fb.group({
-        id: [id],
-        label: [{ value: label, disabled: true }],
-        minValue: [minValue, [Validators.required]],
-        maxValue: [maxValue, [Validators.required]],
-        lowerThreshold: [lowerThreshold, [Validators.required]],
-        upperThreshold: [upperThreshold, [Validators.required]],
-        isAlertEnabled: [isAlertEnabled, [Validators.required]],
-      }, {
-        validators: [minValueLessThanMaxValueValidator(), thresholdBetweenMinMaxValidator()]
-      }),
-      label
-    };
+  getControlValue(parameter: ParameterForm, controlName: string) {
+    return parameter.form.get(controlName)?.value;
   }
 
-  onParameterSubmit(parameter: any) {
+  createParameterForm({ id, label, append, minValue, maxValue, lowerThreshold, upperThreshold, isAlertEnabled }: TelemetryParameterization): ParameterForm {
+    const form = this.fb.group({
+      id: [id],
+      label: [{ value: label, disabled: true }],
+      minValue: [minValue, [Validators.required]],
+      maxValue: [maxValue, [Validators.required]],
+      lowerThreshold: [lowerThreshold, [Validators.required]],
+      upperThreshold: [upperThreshold, [Validators.required]],
+      isAlertEnabled: [isAlertEnabled, [Validators.required]],
+    }, {
+      validators: [minValueLessThanMaxValueValidator(), thresholdBetweenMinMaxValidator()]
+    })
+
+    const initialHash = objectHash(form.getRawValue());
+    return { form, label, measurementUnit: ` ${append}`, initialHash };
+  }
+
+  hasChanges(parameter: ParameterForm): boolean {
+    const currentHash = objectHash(parameter.form.getRawValue());
+    return currentHash !== parameter.initialHash;
+  }
+
+  onParameterSubmit(parameter: ParameterForm) {
     if (parameter.form.valid) {
       const { id, minValue, maxValue, lowerThreshold, upperThreshold, isAlertEnabled } = parameter.form.value;
       this.telemetryService.updateTelemetryParameterization(id, parameter.label, minValue, maxValue, lowerThreshold, upperThreshold, isAlertEnabled).subscribe({
