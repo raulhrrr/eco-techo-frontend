@@ -1,6 +1,6 @@
 import { groupBy } from "../dashboard/interfaces";
 
-export function getFormattedDate(inputDate?: Date): string {
+export const getFormattedDate = (inputDate?: Date): string => {
   if (typeof inputDate === 'string') return inputDate;
 
   const date = inputDate ?? new Date();
@@ -11,7 +11,7 @@ export function getFormattedDate(inputDate?: Date): string {
   return `${yyyy}-${mm}-${dd}`;
 }
 
-export function getDayOrHourFromDate(date: string, groupBy: groupBy): string {
+export const getDayOrHourFromDate = (date: string, groupBy: groupBy): string => {
   if (groupBy === 'day') {
     return date.split(' ')[0];
   }
