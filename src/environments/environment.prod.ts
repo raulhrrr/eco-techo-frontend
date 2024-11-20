@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://eco-techo-backend-production.up.railway.app',
+  baseUrl: 'http://localhost:3000',
   isAuthEnabled: true,
-  socketUrl: 'wss://eco-techo-backend-production.up.railway.app',
+  socketUrl: 'ws://localhost:3000',
 };
