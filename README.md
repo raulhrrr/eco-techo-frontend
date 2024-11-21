@@ -6,9 +6,10 @@
 
 2. Asegurarse que las variables `baseUrl` y `socketUrl` del archivo `src/environments/environment.ts` sean correctas.
 
-3. Ejecutar el siguiente comando:
+3. Ejecutar los siguientes comandos:
 
 ```
+npm i -f
 npm run start
 ```
 
