@@ -17,7 +17,7 @@ npm run start
 
 1. Ejecutar el proyecto eco-techo-backend.
 
-2. Reemplazar las variables `baseUrl` y `socketUrl` del archivo `src/environments/environment.prod.ts`.
+2. Asegurarse que las variables `baseUrl` y `socketUrl` del archivo `src/environments/environment.prod.ts` sean correctas.
 
 3. Ejecutar el siguiente comando:
 
